@@ -1,0 +1,52 @@
+{
+  "name": "casatex-zuerich-demo",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "npm run build:pages",
+    "build:pages": "next build && node scripts/export-nachbereiten.mjs",
+    "build:vercel": "cross-env DEPLOY_TARGET=vercel next build && node scripts/export-nachbereiten.mjs",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "bilder": "node scripts/bilder-optimieren.mjs",
+    "inhalt:pruefen": "tsx --conditions=react-server scripts/inhalt-pruefen.mts",
+    "pruefen": "npm run inhalt:pruefen && npm run lint && npm run typecheck",
+    "export:pruefen": "node scripts/export-pruefen.mjs",
+    "vorschau:pages": "node scripts/vorschau-server.mjs",
+    "qa": "node werkzeuge/qa/audit.mjs && node werkzeuge/qa/funktionen.mjs",
+    "seed": "tsx --conditions=react-server scripts/seed.mts"
+  },
+  "dependencies": {
+    "@fontsource-variable/familjen-grotesk": "^5.3.0",
+    "@fontsource-variable/literata": "^5.3.0",
+    "@phosphor-icons/react": "^2.1.10",
+    "@sanity/client": "^8.9.0",
+    "next": "^16.3.8",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "server-only": "^0.0.1",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "cross-env": "^10.1.0",
+    "eslint": "^9",
+    "eslint-config-next": "^16.3.8",
+    "puppeteer-core": "^25.12.0",
+    "sharp": "^0.35.4",
+    "tailwindcss": "^4",
+    "tsx": "^4.23.15",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=20.9"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true,
+    "unrs-resolver@1.12.2": true
+  }
+}

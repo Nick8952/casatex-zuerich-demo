@@ -1,0 +1,25 @@
+# Abhängigkeiten
+/node_modules
+/studio/node_modules
+/studio/dist
+/studio/.sanity
+
+# Next.js
+/.next/
+/out/
+
+# Umgebungsvariablen (nie committen); die Beispieldatei bleibt versioniert
+.env*
+!.env.example
+
+# Vercel / TypeScript
+.vercel
+*.tsbuildinfo
+next-env.d.ts
+
+# Lokale Prüfausgaben (Audit-Berichte, Screenshots)
+/pruefung
+
+# System
+.DS_Store
+npm-debug.log*
