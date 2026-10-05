@@ -17,6 +17,10 @@
 *.tsbuildinfo
 next-env.d.ts
 
+# Gespiegelte Bilder aus Sanity (entstehen bei jedem Build mit CONTENT_SOURCE=sanity)
+/public/bilder/cms/
+/data/cms-bilder.json
+
 # Lokale Prüfausgaben (Audit-Berichte, Screenshots)
 /pruefung
 

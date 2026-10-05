@@ -1,4 +1,6 @@
 import "server-only";
+import { existsSync, readFileSync } from "node:fs";
+import path from "node:path";
 import { createClient, type SanityClient } from "@sanity/client";
 import { z } from "zod";
 import {
@@ -14,6 +16,9 @@ import {
  * überführt sie in das Domainmodell (lib/content/modell.ts) und prüft sie gegen dieselben Schemas wie die lokalen Inhalte.
  * Die Website bleibt ein statischer Export: Änderungen in Sanity werden sichtbar, sobald ein neuer Build gelaufen ist
  * (Webhook → Vercel-Deploy-Hook, siehe docs/SANITY-VERCEL-EINRICHTUNG.md).
+ *
+ * Bilder kommen nicht vom Sanity-CDN, sondern aus einem lokalen Spiegel (scripts/sanity-bilder.mts), damit die Website
+ * weiterhin keine Anfragen an Dritte auslöst.
  *
  * Die Dokumenttypen und Felder entsprechen studio/schemas/. Der Import der lokalen Inhalte: scripts/seed.mts.
  */
@@ -31,62 +36,97 @@ function sanity(): SanityClient {
 }
 
 // ── Abfragen (GROQ) ────────────────────────────────────────────────────────
-const BILD = `{ alt, legende, symbolbild, nachweis, "url": asset->url, "breite": asset->metadata.dimensions.width, "hoehe": asset->metadata.dimensions.height }`;
+const BILD = `{ alt, legende, symbolbild, nachweis, "assetId": asset->_id, "url": asset->url, "breite": asset->metadata.dimensions.width, "hoehe": asset->metadata.dimensions.height }`;
+const BELEGE = `belege{ ${"herkunft[]{ quelle, url, abgerufen, art }"}, freigabe }`;
 const HERKUNFT = `herkunft[]{ quelle, url, abgerufen, art }`;
 const AUSSAGE = `{ _key, titel, text, link, ${HERKUNFT}, freigabe }`;
 const MATERIAL = `{ "slug": slug.current, titel, gruppe, kurz, abschnitte[]{ _key, titel, text }, eigenschaften, "bild": bild${BILD}, muster[]{ _key, art, titel, text }, reihenfolge }`;
 const ABFRAGEN = {
   einstellungen: `*[_type == "einstellungen"][0]{ firma, kurzname, claim, rechtsform, uid, adresse, telefon, email, routenlink, oeffnungszeiten[]{ _key, tage, zeiten }, oeffnungszeitenHinweis, "logo": logo${BILD}, "seoBild": seoBild${BILD}, ${HERKUNFT} }`,
   texte: `*[_type == "texte"][0]{ demoHinweis, navigation, kopf, footer, ui, formular, einwilligung, seo }`,
-  startseite: `*[_type == "startseite"][0]{ hero{ titel, text, knopf, zweiterKnopf, wechselTitel, imBild, boeden[]{ _key, titel, kachelbreite, "bild": bild${BILD} } }, leistungen, materialien{ titel, text, link, "bild": bild${BILD} }, ueber, referenzen, partner, kontakt, seoTitel, seoBeschreibung }`,
+  startseite: `*[_type == "startseite"][0]{ hero{ titel, text, knopf, zweiterKnopf, wechselTitel, imBild, boeden[]{ _key, titel, kachelbreite, "bild": bild${BILD} } }, leistungen, materialien{ titel, text, link, "bild": bild${BILD} }, ueber, referenzen, partner, kontakt, ${BELEGE}, seoTitel, seoBeschreibung }`,
   leistungen: `*[_type == "leistung"] | order(reihenfolge asc){ "slug": slug.current, titel, kurztitel, kurz, einleitung, aussagen[]${AUSSAGE}, "bild": bild${BILD}, "boden": boden${BILD}, "materialien": materialien[]->${MATERIAL}, fragen[]{ _key, titel, text }, seoTitel, seoBeschreibung, reihenfolge }`,
   materialien: `*[_type == "material"] | order(reihenfolge asc)${MATERIAL}`,
-  leistungenSeite: `*[_type == "leistungenSeite"][0]{ titel, einleitung, "bild": bild${BILD}, bereicheTitel, materialkundeTitel, materialkundeText, gruppen[]{ kennung, titel, text }, aufruf, seoTitel, seoBeschreibung }`,
-  ueberSeite: `*[_type == "ueberSeite"][0]{ titel, einleitung, "bild": bild${BILD}, aussagenTitel, aussagen[]${AUSSAGE}, zweck{ titel, zitat, text, ${HERKUNFT}, freigabe }, aufruf, seoTitel, seoBeschreibung }`,
+  leistungenSeite: `*[_type == "leistungenSeite"][0]{ titel, einleitung, "bild": bild${BILD}, bereicheTitel, materialkundeTitel, materialkundeText, gruppen[]{ kennung, titel, text }, aufruf, ${BELEGE}, seoTitel, seoBeschreibung }`,
+  ueberSeite: `*[_type == "ueberSeite"][0]{ titel, einleitung, "bild": bild${BILD}, aussagenTitel, aussagen[]${AUSSAGE}, zweck{ titel, zitat, text, ${HERKUNFT}, freigabe }, aufruf, ${BELEGE}, seoTitel, seoBeschreibung }`,
   kontaktSeite: `*[_type == "kontaktSeite"][0]{ titel, einleitung, direktTitel, anfahrtTitel, anfahrtText, oeffnungszeitenTitel, seoTitel, seoBeschreibung }`,
   rechtSeite: `*[_type == "rechtSeite" && slug.current == $slug][0]{ "slug": slug.current, titel, einleitung, stand, inhalt, seoTitel, seoBeschreibung }`,
   referenzen: `*[_type == "referenz"] | order(reihenfolge asc){ "_key": _id, titel, ort, jahr, text, "bild": bild${BILD}, ${HERKUNFT}, freigabe }`,
   partner: `*[_type == "partner"] | order(reihenfolge asc){ "_key": _id, name, art, url, "logo": logo${BILD}, ${HERKUNFT}, freigabe }`,
-  bildnachweise: `*[defined(bild.nachweis.quelle)]{ "titel": coalesce(bild.legende, bild.alt), "urheber": bild.nachweis.urheber, "quelle": bild.nachweis.quelle, "lizenz": bild.nachweis.lizenz }`,
 } as const;
 
 // ── Normalisierung ─────────────────────────────────────────────────────────
-type RohBild = { url?: string | null; breite?: number | null; hoehe?: number | null; alt?: string | null; legende?: string | null; symbolbild?: boolean | null; nachweis?: Bild["nachweis"] | null };
+type RohBild = { assetId?: string | null; url?: string | null; breite?: number | null; hoehe?: number | null; alt?: string | null; legende?: string | null; symbolbild?: boolean | null; nachweis?: Bild["nachweis"] | null };
+type Varianten = Pick<Bild, "breite" | "hoehe" | "quellen">;
+/** Liefert zu einem Sanity-Bild die Varianten, die die Website ausliefert. */
+export type BildAufloeser = (roh: RohBild) => Varianten;
 const BREITEN = [480, 960, 1600];
 
 function istRohBild(w: unknown): w is RohBild {
   return typeof w === "object" && w !== null && "url" in w && "breite" in w && "hoehe" in w;
 }
 
-/** Sanity-Bild → Bild des Domainmodells. Die Varianten liefert das Sanity-CDN als WebP in festen Breiten (nie grösser als das Original). */
-function bild(roh: RohBild): Bild | undefined {
+/**
+ * Varianten direkt vom Sanity-CDN. Nur für den Import-Trockenlauf (scripts/seed.mts), der keine Dateien braucht.
+ * Die Website selbst liefert keine Bilder vom CDN aus: siehe `ausSpiegel`.
+ */
+export const ausCdn: BildAufloeser = (roh) => {
+  const breite = roh.breite as number;
+  const breiten = [...new Set(BREITEN.map((b) => Math.min(b, breite)))];
+  const groesste = breiten[breiten.length - 1];
+  return { breite: groesste, hoehe: Math.round((groesste / breite) * (roh.hoehe as number)), quellen: { avif: [], webp: breiten.map((b) => ({ breite: b, url: `${roh.url}?w=${b}&fm=webp&q=75` })) } };
+};
+
+/**
+ * Varianten aus dem lokalen Spiegel. `npm run sanity:bilder` lädt vor dem Build alle Bilder aus Sanity, erzeugt AVIF und WebP
+ * und schreibt das Verzeichnis data/cms-bilder.json. So bleibt die Website auch mit Sanity frei von Anfragen an Dritte,
+ * und die Export-Prüfung (keine fremden Hosts) gilt unverändert.
+ */
+let spiegel: Record<string, Varianten> | null = null;
+const ausSpiegel: BildAufloeser = (roh) => {
+  if (!spiegel) {
+    const datei = path.join(process.cwd(), "data", "cms-bilder.json");
+    if (!existsSync(datei)) throw new Error("data/cms-bilder.json fehlt: Die Bilder aus Sanity sind nicht gespiegelt. Vor dem Build «npm run sanity:bilder» ausführen (die Build-Befehle tun das selbst).");
+    spiegel = JSON.parse(readFileSync(datei, "utf8")) as Record<string, Varianten>;
+  }
+  const eintrag = roh.assetId ? spiegel[roh.assetId] : undefined;
+  if (!eintrag) throw new Error(`Bild ${roh.assetId ?? "(ohne Kennung)"} fehlt im Spiegel (data/cms-bilder.json): «npm run sanity:bilder» erneut ausführen.`);
+  return eintrag;
+};
+
+/** Sanity-Bild → Bild des Domainmodells. */
+function bild(roh: RohBild, aufloesen: BildAufloeser): Bild | undefined {
   if (!roh.url || !roh.breite || !roh.hoehe) return undefined;
-  const breiten = [...new Set(BREITEN.map((b) => Math.min(b, roh.breite as number)))];
-  return {
-    alt: roh.alt ?? "",
-    breite: breiten[breiten.length - 1],
-    hoehe: Math.round((breiten[breiten.length - 1] / roh.breite) * roh.hoehe),
-    quellen: { avif: [], webp: breiten.map((b) => ({ breite: b, url: `${roh.url}?w=${b}&fm=webp&q=75` })) },
-    symbolbild: roh.symbolbild === true,
-    legende: roh.legende ?? undefined,
-    nachweis: roh.nachweis ?? undefined,
-  };
+  return { alt: roh.alt ?? "", ...aufloesen(roh), symbolbild: roh.symbolbild === true, legende: roh.legende ?? undefined, nachweis: roh.nachweis ?? undefined };
 }
 
 /** Geht die Antwort rekursiv durch: wandelt Bilder um und entfernt null (GROQ liefert null, das Domainmodell kennt nur «fehlt»). */
-export function normalisieren(wert: unknown): unknown {
+export function normalisieren(wert: unknown, aufloesen: BildAufloeser = ausCdn): unknown {
   if (wert === null) return undefined;
-  if (Array.isArray(wert)) return wert.map(normalisieren).filter((v) => v !== undefined);
-  if (istRohBild(wert)) return bild(wert);
+  if (Array.isArray(wert)) return wert.map((v) => normalisieren(v, aufloesen)).filter((v) => v !== undefined);
+  if (istRohBild(wert)) return bild(wert, aufloesen);
   if (typeof wert === "object") {
     const aus: Record<string, unknown> = {};
     for (const [k, v] of Object.entries(wert as Record<string, unknown>)) {
-      const n = normalisieren(v);
+      const n = normalisieren(v, aufloesen);
       if (n !== undefined) aus[k] = n;
     }
     return aus;
   }
   return wert;
+}
+
+/** Sammelt aus normalisierten Inhalten alle Bilder mit Nachweis ein, egal wie tief sie liegen (Logo, Böden, Seitenbilder …). */
+function nachweiseSammeln(wert: unknown, liste: { titel: string; urheber: string; quelle: string; lizenz: string }[]): void {
+  if (Array.isArray(wert)) { wert.forEach((v) => nachweiseSammeln(v, liste)); return; }
+  if (!wert || typeof wert !== "object") return;
+  const o = wert as Record<string, unknown>;
+  if ("quellen" in o && "alt" in o) {
+    const n = o.nachweis as Bild["nachweis"];
+    if (n) liste.push({ titel: (o.legende as string | undefined) || (o.alt as string), urheber: n.urheber, quelle: n.quelle, lizenz: n.lizenz });
+    return;
+  }
+  for (const v of Object.values(o)) nachweiseSammeln(v, liste);
 }
 
 // Portable Text (Sanity) → Fliesstext des Domainmodells
@@ -133,7 +173,7 @@ function holen(name: keyof typeof ABFRAGEN, parameter: Record<string, string> = 
   if (!p) {
     p = sanity().fetch(ABFRAGEN[name], parameter).then((roh) => {
       if (roh === null) throw new Error(`Sanity: Dokument «${name}» fehlt oder ist nicht veröffentlicht (Import mit npm run seed, dann im Studio veröffentlichen).`);
-      return normalisieren(roh);
+      return normalisieren(roh, ausSpiegel);
     });
     zwischenspeicher.set(schluessel, p);
   }
@@ -158,7 +198,10 @@ export const sanityQuelle: Inhaltsquelle = {
   getReferenzen: async () => pruefen(z.array(referenzSchema), await holen("referenzen"), "Sanity: Referenzen"),
   getPartner: async () => pruefen(z.array(partnerSchema), await holen("partner"), "Sanity: Partner"),
   getBildnachweise: async () => {
-    const liste = pruefen(z.array(z.object({ titel: z.string(), urheber: z.string(), quelle: z.string(), lizenz: z.string() })), await holen("bildnachweise"), "Sanity: Bildnachweise");
+    // Alle Inhalte durchgehen statt eine eigene Abfrage zu pflegen: So fehlt kein Bild, auch nicht Logo, Böden oder Seitenbilder.
+    const alles = await Promise.all((["einstellungen", "startseite", "leistungen", "materialien", "leistungenSeite", "ueberSeite", "referenzen", "partner"] as const).map((n) => holen(n)));
+    const liste: { titel: string; urheber: string; quelle: string; lizenz: string }[] = [];
+    nachweiseSammeln(alles, liste);
     const gesehen = new Set<string>();
     return liste.filter((n) => (gesehen.has(n.quelle) ? false : (gesehen.add(n.quelle), true)));
   },

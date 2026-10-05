@@ -1,7 +1,7 @@
 "use client";
 /* eslint-disable @next/next/no-img-element -- kleine, vorgerenderte Proben */
 
-import { Fragment, useCallback, useId, useState, type ReactNode } from "react";
+import { Fragment, useCallback, useId, useRef, useState, type ReactNode } from "react";
 import type { Bodenwahl } from "@/lib/content/modell";
 import { bodenStil, bodenUrls } from "@/lib/boden";
 import { kleinsteUrl } from "./Bild";
@@ -18,17 +18,21 @@ export function Bodenwechsel({ boeden, wechselTitel, imBild, symbolText, childre
   const [aktiv, setAktiv] = useState(boeden[0]._key);
   const [geladen, setGeladen] = useState<string[]>([boeden[0]._key]);
   const name = useId();
+  // Die zuletzt gewählte Textur. Lädt jemand rasch nacheinander mehrere, wird nur diese aktiv:
+  // Sonst könnte ein langsameres Bild die spätere Wahl überschreiben, und Radio, Boden und Text widersprächen sich.
+  const gewuenscht = useRef(boeden[0]._key);
 
   const waehlen = useCallback(
     (key: string) => {
       const boden = boeden.find((b) => b._key === key);
       if (!boden) return;
+      gewuenscht.current = key;
       if (geladen.includes(key)) { setAktiv(key); return; }
       const { avif, webp } = bodenUrls(boden.bild);
       const zeigen = () => {
         setGeladen((g) => (g.includes(key) ? g : [...g, key]));
         // Erst unsichtbar einhängen, dann im übernächsten Bild einblenden, damit der Übergang greift
-        requestAnimationFrame(() => requestAnimationFrame(() => setAktiv(key)));
+        requestAnimationFrame(() => requestAnimationFrame(() => { if (gewuenscht.current === key) setAktiv(key); }));
       };
       const probe = new Image();
       probe.onload = zeigen;

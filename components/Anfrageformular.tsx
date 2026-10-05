@@ -18,8 +18,11 @@ export function mailtoBauen(empfaenger: string, betreff: string, text: string): 
  * «E-Mail vorbereiten»: baut aus Name, E-Mail, optionaler Telefonnummer, Anliegen und Nachricht einen mailto:-Link und öffnet
  * das E-Mail-Programm. Die Website sendet, speichert und protokolliert nichts; es gibt keine Versandbestätigung, nur den Hinweis,
  * dass sich das E-Mail-Programm öffnen sollte. Öffnet sich nichts (kein E-Mail-Programm eingerichtet), lässt sich die Nachricht
- * kopieren. Sehr lange Nachrichten kommen als Kurzfassung in den Link, der ganze Text liegt dann in der Zwischenablage.
- * Ohne JavaScript: direkter E-Mail-Link (<noscript>).
+ * kopieren. Sehr lange Nachrichten kommen als Kurzfassung in den Link, der ganze Text liegt dann in der Zwischenablage. Ist die
+ * Zwischenablage gesperrt, öffnet sich KEIN gekürzter Entwurf; stattdessen steht die ganze Nachricht zum Kopieren von Hand da.
+ *
+ * Ohne JavaScript bleibt der Knopf gesperrt: Ein gewöhnliches Absenden würde die Eingaben sonst als Parameter an die Adresse
+ * hängen und damit an den Server schicken. Stattdessen nennt <noscript> die E-Mail-Adresse.
  */
 export function Anfrageformular({ texte: f, empfaenger, startAnliegen }: { texte: Texte["formular"]; empfaenger: string; startAnliegen?: string }) {
   const id = useId();
@@ -33,6 +36,7 @@ export function Anfrageformular({ texte: f, empfaenger, startAnliegen }: { texte
   const [fehler, setFehler] = useState<{ name?: string; email?: string; nachricht?: string }>({});
   const [status, setStatus] = useState("");
   const [vorbereitet, setVorbereitet] = useState(false);
+  const [volltext, setVolltext] = useState(false);
 
   const anliegenTitel = f.anliegenOptionen.find((o) => o.wert === anliegen)?.titel ?? anliegen;
   const emailGueltig = (w: string) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(w.trim());
@@ -66,9 +70,15 @@ export function Anfrageformular({ texte: f, empfaenger, startAnliegen }: { texte
         let zusatz = "";
         if (link.length > MAILTO_GRENZE) {
           // Zu lang für einen verlässlichen mailto:-Link: Kurzfassung in den Link, ganzer Text in die Zwischenablage.
-          const ok = await kopieren();
+          // Klappt das Kopieren nicht, wird kein Entwurf geöffnet (er wäre unvollständig): Der ganze Text erscheint zum Kopieren von Hand.
+          if (!(await kopieren())) {
+            setVorbereitet(true);
+            setVolltext(true);
+            setStatus(f.zuLangFehler);
+            return;
+          }
           link = mailtoBauen(empfaenger, betreff, `${kopf}\n\n(Bitte die Nachricht aus der Zwischenablage hier einfügen.)`);
-          zusatz = ok ? ` ${f.kopiert}` : "";
+          zusatz = ` ${f.kopiert}`;
         }
         setVorbereitet(true);
         setStatus(f.hinweisNachher + zusatz);
@@ -119,12 +129,12 @@ export function Anfrageformular({ texte: f, empfaenger, startAnliegen }: { texte
       </p>
       <div className="grid gap-4">
         <div className="flex flex-wrap gap-3">
-          <button type="submit" className="knopf knopf-primaer">
+          <button type="submit" className="knopf knopf-primaer disabled:cursor-not-allowed disabled:opacity-60" disabled={!geladen}>
             <EnvelopeSimpleIcon size={20} weight="bold" aria-hidden="true" />
             {f.absenden}
           </button>
           {vorbereitet ? (
-            <button type="button" className="knopf knopf-sekundaer" onClick={async () => setStatus((await kopieren()) ? f.kopiert : f.kopierenFehler)}>
+            <button type="button" className="knopf knopf-sekundaer" onClick={async () => { const ok = await kopieren(); if (!ok) setVolltext(true); setStatus(ok ? f.kopiert : f.kopierenFehler); }}>
               <CopyIcon size={20} weight="bold" aria-hidden="true" />
               {f.kopieren}
             </button>
@@ -134,6 +144,12 @@ export function Anfrageformular({ texte: f, empfaenger, startAnliegen }: { texte
           {status}
           {vorbereitet ? <> <a href={`mailto:${empfaenger}`} className="textlink">{empfaenger}</a></> : null}
         </p>
+        {volltext ? (
+          <div className="feld">
+            <label htmlFor={`${id}-volltext`}>{f.volltextLabel}</label>
+            <textarea id={`${id}-volltext`} readOnly rows={8} value={`An: ${empfaenger}\nBetreff: ${betreff}\n\n${text}`} onFocus={(ev) => ev.currentTarget.select()} />
+          </div>
+        ) : null}
       </div>
     </form>
   );

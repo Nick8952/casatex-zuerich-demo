@@ -23,15 +23,22 @@ export const basePath: string =
 if (basePath && !/^\/[A-Za-z0-9._~-]+(\/[A-Za-z0-9._~-]+)*$/.test(basePath)) {
   throw new Error(`BASE_PATH=«${basePath}» muss mit «/» beginnen, ohne Schluss-Schrägstrich (oder leer sein).`);
 }
-// Leere oder fehlende SITE_URL ist erlaubt (dann gilt der Standard); ein gesetzter Wert muss eine http(s)-URL sein.
+// Leere oder fehlende SITE_URL ist erlaubt (dann gilt der Standard). Ein gesetzter Wert muss eine reine http(s)-Adresse ohne Pfad
+// sein und lässt sich nicht mit einem Unterpfad kombinieren: So kann in der GitHub-Pages-Demo nie eine Kundendomain im
+// Canonical oder in Open Graph landen.
 const siteUrlEnv = process.env.SITE_URL?.trim().replace(/\/$/, "");
+let siteUrlHost = "";
 if (siteUrlEnv) {
+  let u: URL;
   try {
-    const u = new URL(siteUrlEnv);
-    if (u.protocol !== "https:" && u.protocol !== "http:") throw new Error();
+    u = new URL(siteUrlEnv);
   } catch {
     throw new Error(`SITE_URL=«${siteUrlEnv}» ist keine gültige http(s)-URL.`);
   }
+  if (u.protocol !== "https:" && u.protocol !== "http:") throw new Error(`SITE_URL=«${siteUrlEnv}» ist keine gültige http(s)-URL.`);
+  if (u.pathname !== "/" || u.search || u.hash || u.username) throw new Error(`SITE_URL=«${siteUrlEnv}» darf nur aus Protokoll und Domain bestehen (kein Pfad, keine Parameter).`);
+  if (basePath) throw new Error(`SITE_URL lässt sich nicht mit dem Unterpfad «${basePath}» kombinieren. Für eine eigene Domain DEPLOY_TARGET=vercel setzen (oder BASE_PATH="" für einen Export an der Domain-Wurzel).`);
+  siteUrlHost = u.hostname.toLowerCase();
 }
 export const siteUrl: string =
   siteUrlEnv && siteUrlEnv.length > 0
@@ -40,5 +47,25 @@ export const siteUrl: string =
       ? `https://${REPO_NAME}.vercel.app`
       : `https://${GITHUB_KONTO}.github.io${basePath}`;
 
-/** Indexierung nur, wenn ausdrücklich freigegeben (nach Go-Live auf der Kundendomain). */
-export const indexierungErlaubt = process.env.INDEXIERUNG === "1";
+/**
+ * Indexierung nur, wenn ausdrücklich freigegeben (nach Go-Live auf der Kundendomain). Eine Variable allein genügt nicht:
+ * INDEXIERUNG=1 verlangt zusätzlich eine ausdrückliche SITE_URL, und Vorschau-Adressen (github.io, vercel.app, localhost)
+ * sind ausgeschlossen. Damit bleibt die Demo auch dann noindex, wenn jemand INDEXIERUNG=1 versehentlich setzt: Der Build bricht ab.
+ */
+const VORSCHAU_HOSTS = /(^|\.)github\.io$|(^|\.)vercel\.app$|(^|\.)netlify\.app$|(^|\.)pages\.dev$|^localhost$|^127\.0\.0\.1$/;
+/** Reservierte Testdomains (RFC 2606/6761): Hier kann nie eine echte Website liegen. */
+const TEST_HOSTS = /(^|\.)example\.(com|org|net)$|\.(test|example|invalid)$/;
+const indexierungGewuenscht = process.env.INDEXIERUNG === "1";
+if (indexierungGewuenscht && !siteUrlEnv) {
+  throw new Error("INDEXIERUNG=1 verlangt eine ausdrückliche SITE_URL (die Kundendomain, zum Beispiel https://www.beispiel.ch). Ohne sie bleibt die Website noindex: INDEXIERUNG weglassen.");
+}
+if (indexierungGewuenscht && VORSCHAU_HOSTS.test(siteUrlHost)) {
+  throw new Error(`INDEXIERUNG=1 ist für die Vorschau-Adresse «${siteUrlHost}» nicht erlaubt. Indexiert wird nur die Kundendomain.`);
+}
+export const indexierungErlaubt = indexierungGewuenscht;
+/**
+ * Probe-Build für eine reservierte Testdomain (https://www.example.com, *.test): Sitemap, strukturierte Daten und fehlendes
+ * noindex lassen sich so prüfen, ohne dass die Inhalte schon vom Unternehmen freigegeben sind. Für jede echte Domain gilt die
+ * Freigabeprüfung (lib/content/freigabe.ts) und bricht den Build ab, solange etwas nicht freigegeben ist.
+ */
+export const indexierungProbe = indexierungGewuenscht && TEST_HOSTS.test(siteUrlHost);

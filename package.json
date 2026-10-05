@@ -5,8 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "npm run build:pages",
-    "build:pages": "next build && node scripts/export-nachbereiten.mjs",
-    "build:vercel": "cross-env DEPLOY_TARGET=vercel next build && node scripts/export-nachbereiten.mjs",
+    "build:pages": "npm run build:kern",
+    "build:vercel": "cross-env DEPLOY_TARGET=vercel npm run build:kern",
+    "build:kern": "npm run sanity:bilder && next build && node scripts/export-nachbereiten.mjs",
+    "sanity:bilder": "tsx scripts/sanity-bilder.mts",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "bilder": "node scripts/bilder-optimieren.mjs",

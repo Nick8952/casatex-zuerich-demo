@@ -9,7 +9,12 @@ import { useEffect } from "react";
 export function AnkerOeffner({ praefix }: { praefix: string }) {
   useEffect(() => {
     const oeffnen = () => {
-      const id = decodeURIComponent(window.location.hash.slice(1));
+      let id: string;
+      try {
+        id = decodeURIComponent(window.location.hash.slice(1));
+      } catch {
+        return; // fehlerhaft kodierte Sprungmarke («#%»): ignorieren
+      }
       if (!id.startsWith(praefix)) return;
       const ziel = document.getElementById(id);
       if (ziel instanceof HTMLDetailsElement) {

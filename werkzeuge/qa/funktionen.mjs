@@ -201,6 +201,33 @@ async function frisch({ breite = 1440, hoehe = 900, reduziert = false } = {}) {
   await ctx.close();
 }
 
+// 7b) Formular ohne JavaScript und mit gesperrter Zwischenablage
+{
+  const { ctx, page } = await frisch();
+  await page.setJavaScriptEnabled(false);
+  await page.goto(BASE + "/kontakt/", { waitUntil: "load" });
+  ok("Formular ohne JavaScript: Knopf ist gesperrt (kein Absenden, das die Eingaben an die Adresse hängt), E-Mail-Adresse steht da", await page.evaluate((m) => document.querySelector('main form button[type="submit"]').disabled === true && document.querySelector("main form noscript")?.textContent.includes(m), EMAIL));
+  await page.type('main form input[name="Name"]', "Testperson Fiktiv");
+  await page.keyboard.press("Enter"); await warten(500);
+  ok("Formular ohne JavaScript: Eingabetaste sendet nichts, die Adresse bleibt ohne Parameter", page.url() === BASE + "/kontakt/", page.url().replace(BASE, ""));
+  await ctx.close();
+  const z = await frisch();
+  // Zwischenablage gesperrt (wie in manchen Browsern oder Firmenumgebungen)
+  await z.page.evaluateOnNewDocument(() => { Object.defineProperty(navigator, "clipboard", { value: { writeText: () => Promise.reject(new Error("gesperrt")), readText: () => Promise.reject(new Error("gesperrt")) }, configurable: true }); });
+  const cdp = await z.page.createCDPSession();
+  await cdp.send("Page.enable");
+  const navigationen = [];
+  cdp.on("Page.frameRequestedNavigation", (e) => navigationen.push(e.url));
+  cdp.on("Page.frameScheduledNavigation", (e) => navigationen.push(e.url));
+  await z.page.goto(BASE + "/kontakt/", { waitUntil: "networkidle0" });
+  await z.page.type('main form input[name="Name"]', "Testperson Fiktiv");
+  await z.page.type('main form input[name="E-Mail"]', "test@example.invalid");
+  await z.page.evaluate(() => { const t = document.querySelector("main form textarea"); const setzer = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, "value").set; setzer.call(t, "Überlange Äusserung öffnet Türen. ".repeat(36).slice(0, 1200)); t.dispatchEvent(new Event("input", { bubbles: true })); });
+  await z.page.click('main form button[type="submit"]'); await warten(700);
+  ok("Formular, lange Nachricht ohne Zwischenablage: kein gekürzter E-Mail-Entwurf, ganze Nachricht steht zum Kopieren da", !navigationen.some((u) => u.startsWith("mailto:")) && (await z.page.evaluate(() => { const t = document.querySelector("main form textarea[readonly]"); return !!t && t.value.includes("Überlange Äusserung") && t.value.startsWith("An: ") && !!document.querySelector(`label[for="${t.id}"]`) && document.querySelector('main form [role="status"]').textContent.includes("zu lang"); })));
+  await z.ctx.close();
+}
+
 // 8) Links: Telefon, E-Mail, Karte nur als externer Link
 {
   const { ctx, page } = await frisch();

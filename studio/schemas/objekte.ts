@@ -53,7 +53,11 @@ export const herkunft = defineType({
   type: "object",
   fields: [
     defineField({ name: "quelle", title: "Bezeichnung der Quelle", type: "string", description: "Zum Beispiel «Zentraler Firmenindex Zefix» oder «Bestätigung von Herrn Muster, E-Mail vom 3. März»", validation: (r) => r.required().min(3) }),
-    defineField({ name: "url", title: "Adresse der Quelle", type: "url", validation: (r) => r.uri({ scheme: ["https"] }) }),
+    defineField({
+      name: "url", title: "Adresse der Quelle", type: "url",
+      description: "Pflicht bei amtlichen Quellen, Verbänden und Behördenportalen. Bei eigenen Angaben des Unternehmens darf sie fehlen; dann steht in der Bezeichnung, wer wann bestätigt hat.",
+      validation: (r) => r.uri({ scheme: ["https"] }).custom((url, kontext) => (url || (kontext.parent as { art?: string } | undefined)?.art === "eigene-quelle" ? true : "Bitte die Adresse der Quelle angeben.")),
+    }),
     defineField({ name: "abgerufen", title: "Abgerufen oder bestätigt am", type: "date", validation: (r) => r.required() }),
     defineField({
       name: "art",
@@ -80,6 +84,17 @@ export const aussage = defineType({
     defineField({ name: "freigabe", title: "Freigabe", type: "string", description: "«Demo»: belegt, aber vom Unternehmen noch nicht bestätigt. «Live»: vom Unternehmen freigegeben.", options: { list: [{ title: "Demo (belegt, nicht bestätigt)", value: "demo" }, { title: "Live (vom Unternehmen freigegeben)", value: "live" }], layout: "radio" }, initialValue: "demo", validation: (r) => r.required() }),
   ],
   preview: { select: { title: "titel", subtitle: "freigabe" }, prepare: ({ title, subtitle }) => ({ title, subtitle: subtitle === "live" ? "freigegeben" : "Demo, noch nicht bestätigt" }) },
+});
+
+export const belege = defineType({
+  name: "belege",
+  title: "Belege für die Texte dieser Seite",
+  type: "object",
+  description: "Einleitungen und freie Texte dieser Seite sagen etwas über das Unternehmen. Hier steht, worauf sie sich stützen und ob das Unternehmen sie freigegeben hat.",
+  fields: [
+    defineField({ name: "herkunft", title: "Quellen", type: "array", of: [defineArrayMember({ type: "herkunft" })], validation: (r) => r.required().min(1).error("Mindestens eine Quelle angeben.") }),
+    defineField({ name: "freigabe", title: "Freigabe", type: "string", description: "«Live» erst, wenn das Unternehmen die Texte dieser Seite bestätigt hat. Vorher lässt sich die Website nicht für Suchmaschinen freigeben.", options: { list: [{ title: "Demo (belegt, nicht bestätigt)", value: "demo" }, { title: "Live (vom Unternehmen freigegeben)", value: "live" }], layout: "radio" }, initialValue: "demo", validation: (r) => r.required() }),
+  ],
 });
 
 export const abschnitt = defineType({

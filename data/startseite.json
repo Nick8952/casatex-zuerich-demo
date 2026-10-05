@@ -78,6 +78,29 @@
     "titel": "Sprechen wir über Ihren Boden",
     "text": "Sie erreichen uns telefonisch und per E-Mail. Oder Sie bereiten Ihre Anfrage in Ruhe mit dem Formular vor."
   },
+  "belege": {
+    "herkunft": [
+      {
+        "quelle": "Zentraler Firmenindex Zefix: Sitz und Zweck der Gesellschaft",
+        "url": "https://www.zefix.ch/de/search/entity/list/firm/839033",
+        "abgerufen": "2026-10-05",
+        "art": "amtlich"
+      },
+      {
+        "quelle": "ISP, Mitgliederliste",
+        "url": "https://www.parkett-verband.ch/de/ISP/Mitglieder",
+        "abgerufen": "2026-10-05",
+        "art": "verband"
+      },
+      {
+        "quelle": "berufswahl.zh.ch, Eintrag des Lehrbetriebs",
+        "url": "https://berufswahl.zh.ch/schnupperlehre/casatex-zuerich-ag-boden-parkettleger-in-parkett-efz/",
+        "abgerufen": "2026-10-05",
+        "art": "behoerdenportal"
+      }
+    ],
+    "freigabe": "demo"
+  },
   "seoTitel": "Parkett, Teppiche und Bodenbeläge in Zürich",
   "seoBeschreibung": "Casatex Zürich AG: Fachbetrieb für Bodenbelagsarbeiten in Zürich-Altstetten. Parkett, Teppiche und Bodenbeläge, mit Materialkunde zum Vergleichen."
 }

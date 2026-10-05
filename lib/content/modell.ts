@@ -13,17 +13,27 @@ import { z } from "zod";
 
 /** Zugelassene Herkunftsarten für Unternehmensaussagen. «Verzeichnis» fehlt absichtlich. */
 export const HERKUNFT_ARTEN = ["amtlich", "verband", "behoerdenportal", "eigene-quelle"] as const;
-export const herkunftSchema = z.object({
-  quelle: z.string().min(3),
-  url: z.url().optional(),
-  abgerufen: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Datum als JJJJ-MM-TT"),
-  art: z.enum(HERKUNFT_ARTEN),
-});
+export const herkunftSchema = z
+  .object({
+    quelle: z.string().min(3),
+    /** Adresse der Quelle. Pflicht, ausser bei eigenen Angaben des Unternehmens (dann nennt `quelle`, wer wann bestätigt hat). */
+    url: z.url().optional(),
+    abgerufen: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Datum als JJJJ-MM-TT"),
+    art: z.enum(HERKUNFT_ARTEN),
+  })
+  .refine((h) => h.art === "eigene-quelle" || !!h.url, { message: "Die Quelle braucht eine Adresse (nur bei eigenen Angaben des Unternehmens darf sie fehlen).", path: ["url"] });
 export type Herkunft = z.infer<typeof herkunftSchema>;
 
 /** «demo»: für die Verkaufs-Demo belegt. «live»: zusätzlich vom Unternehmen für den Produktivbetrieb freigegeben. */
 export const freigabeSchema = z.enum(["demo", "live"]);
 export type Freigabe = z.infer<typeof freigabeSchema>;
+
+/**
+ * Belege für freie Texte einer Seite, die etwas über das Unternehmen sagen (Einstieg, Einleitungen): dieselbe Regel wie bei
+ * einzelnen Aussagen, aber für die Seite als Ganzes.
+ */
+export const belegeSchema = z.object({ herkunft: z.array(herkunftSchema).min(1, "Mindestens eine Quelle angeben."), freigabe: freigabeSchema });
+export type Belege = z.infer<typeof belegeSchema>;
 
 export const linkSchema = z.object({ text: z.string().min(1), ziel: z.string().min(1) });
 export type Link = z.infer<typeof linkSchema>;
@@ -159,7 +169,7 @@ export const texteSchema = z.object({
     titel: z.string(), einleitung: z.string(), name: z.string(), email: z.string(), telefon: z.string(), anliegen: z.string(),
     anliegenOptionen: z.array(z.object({ wert: z.string(), titel: z.string() })).min(1),
     nachricht: z.string(), nachrichtHilfe: z.string(), pflicht: z.string(), datenschutzHinweis: z.string(), datenschutzLink: linkSchema,
-    absenden: z.string(), hinweisNachher: z.string(), kopieren: z.string(), kopiert: z.string(), kopierenFehler: z.string(), betreff: z.string(),
+    absenden: z.string(), hinweisNachher: z.string(), kopieren: z.string(), kopiert: z.string(), kopierenFehler: z.string(), zuLangFehler: z.string(), volltextLabel: z.string(), betreff: z.string(),
     fehlerName: z.string(), fehlerEmail: z.string(), fehlerNachricht: z.string(), ohneJavascript: z.string(),
   }),
   einwilligung: z.object({
@@ -187,6 +197,7 @@ export const startseiteSchema = z.object({
   referenzen: z.object({ titel: z.string(), text: z.string() }),
   partner: z.object({ titel: z.string(), text: z.string() }),
   kontakt: z.object({ titel: z.string(), text: z.string() }),
+  belege: belegeSchema,
   ...seoSchema,
 });
 export type Startseite = z.infer<typeof startseiteSchema>;
@@ -196,6 +207,7 @@ export const leistungenSeiteSchema = z.object({
   bereicheTitel: z.string(), materialkundeTitel: z.string(), materialkundeText: z.string(),
   gruppen: z.array(z.object({ kennung: z.enum(MATERIAL_GRUPPEN), titel: z.string(), text: z.string() })),
   aufruf: z.object({ titel: z.string(), text: z.string(), knopf: linkSchema }),
+  belege: belegeSchema,
   ...seoSchema,
 });
 export type LeistungenSeite = z.infer<typeof leistungenSeiteSchema>;
@@ -205,6 +217,7 @@ export const ueberSeiteSchema = z.object({
   aussagenTitel: z.string(), aussagen: z.array(aussageSchema).min(1),
   zweck: z.object({ titel: z.string(), zitat: z.string(), text: z.string(), herkunft: z.array(herkunftSchema).min(1), freigabe: freigabeSchema }),
   aufruf: z.object({ titel: z.string(), text: z.string(), knopf: linkSchema }),
+  belege: belegeSchema,
   ...seoSchema,
 });
 export type UeberSeite = z.infer<typeof ueberSeiteSchema>;

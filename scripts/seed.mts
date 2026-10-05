@@ -34,6 +34,7 @@ const key = (praefix: string) => `${praefix}${(zaehler++).toString(36)}`;
 const liste = <T extends Roh>(eintraege: T[] | undefined, typ: string) => (eintraege ?? []).map((e) => ({ _type: typ, _key: e._key ?? key(typ.slice(0, 3)), ...e }));
 const verweis = (l: Roh) => ({ _type: "verweis", text: l.text, ziel: l.ziel });
 const herkunft = (h: Roh[]) => liste(h, "herkunft");
+const belege = (b: Roh) => ({ _type: "belege", herkunft: herkunft(b.herkunft), freigabe: b.freigabe });
 const aussagen = (a: Roh[]) => liste(a, "aussage").map((x) => ({ ...x, herkunft: herkunft(x.herkunft), ...(x.link ? { link: verweis(x.link) } : {}) }));
 const slug = (current: string) => ({ _type: "slug", current });
 function bildFeld(id: string) {
@@ -80,9 +81,10 @@ function dokumenteBauen(): Doc[] {
     hero: { ...s.hero, knopf: verweis(s.hero.knopf), zweiterKnopf: verweis(s.hero.zweiterKnopf), boeden: liste(s.hero.boeden, "bodenwahl").map((b) => ({ ...b, bild: bildFeld(b.bild) })) },
     materialien: { ...s.materialien, link: verweis(s.materialien.link), bild: bildFeld(s.materialien.bild) },
     ueber: { ...s.ueber, link: verweis(s.ueber.link) },
+    belege: belege(s.belege),
   });
-  docs.push({ _id: "leistungenSeite", _type: "leistungenSeite", ...ls, bild: bildFeld(ls.bild), gruppen: liste(ls.gruppen, "materialgruppe"), aufruf: { _type: "aufruf", ...ls.aufruf, knopf: verweis(ls.aufruf.knopf) } });
-  docs.push({ _id: "ueberSeite", _type: "ueberSeite", ...us, bild: bildFeld(us.bild), aussagen: aussagen(us.aussagen), zweck: { ...us.zweck, herkunft: herkunft(us.zweck.herkunft) }, aufruf: { _type: "aufruf", ...us.aufruf, knopf: verweis(us.aufruf.knopf) } });
+  docs.push({ _id: "leistungenSeite", _type: "leistungenSeite", ...ls, bild: bildFeld(ls.bild), gruppen: liste(ls.gruppen, "materialgruppe"), aufruf: { _type: "aufruf", ...ls.aufruf, knopf: verweis(ls.aufruf.knopf) }, belege: belege(ls.belege) });
+  docs.push({ _id: "ueberSeite", _type: "ueberSeite", ...us, bild: bildFeld(us.bild), aussagen: aussagen(us.aussagen), zweck: { ...us.zweck, herkunft: herkunft(us.zweck.herkunft) }, aufruf: { _type: "aufruf", ...us.aufruf, knopf: verweis(us.aufruf.knopf) }, belege: belege(us.belege) });
   docs.push({ _id: "kontaktSeite", _type: "kontaktSeite", ...ks });
   for (const name of ["impressum", "datenschutz"]) {
     const { bloecke, slug: s2, ...rest } = lesen(`seiten/${name}.json`);
@@ -115,7 +117,7 @@ function projizieren(wert: unknown, docs: Map<string, Doc>): unknown {
   }
   if (o._type === "bildMitText") {
     const m = /-(\d+)x(\d+)-/.exec(o.asset._ref);
-    return { url: `https://cdn.sanity.io/images/probe/production/${o.asset._ref}.webp`, breite: Number(m?.[1]), hoehe: Number(m?.[2]), alt: o.alt, legende: o.legende ?? null, symbolbild: o.symbolbild, nachweis: o.nachweis };
+    return { assetId: o.asset._ref, url: `https://cdn.sanity.io/images/probe/production/${o.asset._ref}.webp`, breite: Number(m?.[1]), hoehe: Number(m?.[2]), alt: o.alt, legende: o.legende ?? null, symbolbild: o.symbolbild, nachweis: o.nachweis };
   }
   const aus: Roh = {};
   for (const [k, v] of Object.entries(o)) if (k !== "_type" && k !== "_id") aus[k] = projizieren(v, docs);
@@ -169,7 +171,9 @@ if (probe) {
     process.exit(1);
   }
   const client = createClient({ projectId, dataset, token, apiVersion: "2025-02-19", useCdn: false });
-  // Bilder hochladen (grösste WebP-Variante, so wie die Demo sie zeigt), dann die Dokumente mit den echten Bildkennungen neu bauen
+  // Bilder hochladen (grösste WebP-Variante, so wie die Demo sie zeigt), dann die Dokumente mit den echten Bildkennungen neu bauen.
+  // Wiederholte Läufe erzeugen keine Duplikate: Sanity vergibt die Asset-Kennung aus dem Inhalt der Datei, derselbe Upload
+  // liefert also dasselbe Asset zurück.
   for (const [id, b] of Object.entries(bilder)) {
     const datei = path.join("public", b.quellen.webp[b.quellen.webp.length - 1].url);
     const asset = await client.assets.upload("image", createReadStream(datei), { filename: path.basename(datei) });

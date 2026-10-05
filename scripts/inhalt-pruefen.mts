@@ -12,6 +12,7 @@ import path from "node:path";
 import { lokaleQuelle } from "../lib/content/local";
 import { pfade, type Aussage } from "../lib/content/modell";
 import { istErlaubtesLinkziel } from "../lib/assets";
+import { offeneFreigaben } from "../lib/content/freigabe";
 
 const live = process.argv.includes("--live");
 const fehler: string[] = [];
@@ -117,18 +118,20 @@ const aussagen: { wo: string; a: Pick<Aussage, "titel" | "herkunft" | "freigabe"
   { wo: "Über Casatex", a: { titel: ueber.zweck.titel, herkunft: ueber.zweck.herkunft, freigabe: ueber.zweck.freigabe } },
   ...referenzen.map((r) => ({ wo: "Referenzen", a: { titel: r.titel, herkunft: r.herkunft, freigabe: r.freigabe } })),
   ...partner.map((p) => ({ wo: "Partner", a: { titel: p.name, herkunft: p.herkunft, freigabe: p.freigabe } })),
+  // Freie Texte der Seiten, die etwas über das Unternehmen sagen, sind über die Belege der Seite gedeckt
+  { wo: "Startseite", a: { titel: "Belege der Seite", ...start.belege } },
+  { wo: "Leistungen und Materialien", a: { titel: "Belege der Seite", ...lSeite.belege } },
+  { wo: "Über Casatex", a: { titel: "Belege der Seite", ...ueber.belege } },
 ];
 for (const { wo, a } of aussagen) {
-  for (const h of a.herkunft) if (!h.url) fehler.push(`${wo}, «${a.titel}»: Quelle «${h.quelle}» ohne Adresse`);
+  for (const h of a.herkunft) if (!h.url && h.art !== "eigene-quelle") fehler.push(`${wo}, «${a.titel}»: Quelle «${h.quelle}» ohne Adresse`);
 }
-const offen = aussagen.filter(({ a }) => a.freigabe !== "live");
+const offen = await offeneFreigaben(q);
 if (live) {
-  for (const { wo, a } of offen) fehler.push(`Noch nicht vom Unternehmen freigegeben: ${wo}, «${a.titel}»`);
+  fehler.push(...offen);
   if (!e.oeffnungszeiten.length) hinweise.push("Öffnungszeiten sind leer: Abschnitt erscheint nicht. Beim Unternehmen erfragen.");
-  if (/Nick Holzbecher/.test(JSON.stringify(impressum))) fehler.push("Impressum nennt noch den Betreiber der Demo: für den Produktivbetrieb neu schreiben.");
-  if (/GitHub/.test(JSON.stringify(datenschutz))) fehler.push("Datenschutzerklärung beschreibt noch GitHub Pages: an das produktive Hosting anpassen.");
 } else if (offen.length) {
-  hinweise.push(`${offen.length} Unternehmensaussagen sind für die Demo belegt, aber noch nicht vom Unternehmen freigegeben (Liste: npm run inhalt:pruefen -- --live).`);
+  hinweise.push(`${offen.length} Punkte sind für die Demo belegt, aber noch nicht für den Produktivbetrieb freigegeben (Liste: npm run inhalt:pruefen -- --live).`);
 }
 
 for (const h of hinweise) console.log(`· ${h}`);
@@ -136,4 +139,4 @@ if (fehler.length) {
   console.error(`✗ ${fehler.length} Problem(e) in den Inhalten:\n` + fehler.map((f) => `  - ${f}`).join("\n"));
   process.exit(1);
 }
-console.log(`✓ Inhalte in Ordnung: ${texte.length} Texte, ${links.length} Links, ${Object.keys(verzeichnis).length} Bilder, ${aussagen.length} Unternehmensaussagen mit Quelle${live ? ", alle freigegeben" : ""}.`);
+console.log(`✓ Inhalte in Ordnung: ${texte.length} Texte, ${links.length} Links, ${Object.keys(verzeichnis).length} Bilder, ${aussagen.length} Unternehmensaussagen und Seitenbelege mit Quelle${live ? ", alles freigegeben" : ""}.`);
