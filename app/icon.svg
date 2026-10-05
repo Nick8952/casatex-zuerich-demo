@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Raumkante: helle Wand, darunter der Boden in Casatex-Blau. Kein Nachbau der Bildmarke. -->
+  <rect width="64" height="64" fill="#f1f0ec"/>
+  <rect y="36" width="64" height="28" fill="#1b89e0"/>
+  <rect y="32" width="64" height="4" fill="#15171a"/>
+</svg>

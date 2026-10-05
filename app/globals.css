@@ -1,0 +1,387 @@
+@import "tailwindcss";
+
+/*
+ * Gestaltung «Raumkante» (siehe docs/DESIGN.md).
+ * Wand trifft Boden: helle, ruhige Wandflächen für Text, darunter Material. Eine feine Sockelleiste trennt beides.
+ * Farben: eine helle Neutrale (Wand), kühles Schwarz (Tinte) wie im Logo, genau ein Akzent: das Blau der Casatex-Bildmarke.
+ * Formen: Flächen und Bilder kantig (0), Bedienelemente mit 2 px Radius. Helles Theme ist fix.
+ */
+@theme {
+  --color-wand: #f1f0ec;
+  --color-papier: #fbfaf8;
+  --color-weiss: #ffffff;
+  --color-tinte: #15171a;
+  --color-tinte-2: #44484f;
+  --color-grau: #5f636a;
+  --color-linie: #d8d5ce;
+  --color-linie-stark: #b5b1a8;
+  --color-blau: #1b89e0;
+  --color-blau-tief: #0a55a3;
+  --color-blau-dunkel: #083f7a;
+  --color-blau-hell: #e2edf9;
+  --color-fehler: #a3261b;
+
+  --font-titel: var(--schrift-titel), "Helvetica Neue", Arial, sans-serif;
+  --font-text: var(--schrift-text), Georgia, "Times New Roman", serif;
+
+  --radius-knopf: 2px;
+  /* Seitenrand des Rasters; .behaelter und der Einstieg benutzen denselben Wert */
+  --spacing-rand: clamp(1.25rem, 4.5vw, 3.5rem);
+  --ease-ruhig: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+/* Ebenen (einzige z-index-Werte der Website): Kopfzeile 30, Einwilligungsbanner 40, Sprunglink 50. Dialoge liegen im Top-Layer. */
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+  -webkit-text-size-adjust: 100%;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  background: var(--color-wand);
+  color: var(--color-tinte);
+  font-family: var(--font-text);
+  font-size: 1.0625rem;
+  line-height: 1.62;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--color-blau-tief); color: var(--color-weiss); }
+
+:focus-visible {
+  outline: 3px solid var(--color-blau-tief);
+  outline-offset: 3px;
+  border-radius: var(--radius-knopf);
+}
+}
+
+/*
+ * Eigene Klassen liegen in der Ebene «components»: So können Tailwind-Utilities (hidden, sm:inline-flex, mt-8 …)
+ * sie gezielt übersteuern. Ohne Ebene würden sie jede Utility schlagen.
+ */
+@layer components {
+/* ── Raster ─────────────────────────────────────────────────────────── */
+.behaelter {
+  width: 100%;
+  max-width: 82rem;
+  margin-inline: auto;
+  padding-inline: var(--spacing-rand);
+}
+.abschnitt { padding-block: clamp(3.25rem, 7vw, 6rem); }
+
+/* ── Schrift ────────────────────────────────────────────────────────── */
+.titel-1, .titel-2, .titel-3, .titel-4 { font-family: var(--font-titel); font-weight: 600; text-wrap: balance; }
+/* Lange zusammengesetzte Wörter («Datenschutzerklärung») dürfen auf schmalen Bildschirmen getrennt werden, statt überzulaufen */
+.titel-1, .titel-2 { hyphens: auto; overflow-wrap: break-word; }
+.titel-1 { font-size: clamp(2.5rem, 1.6rem + 4.6vw, 5rem); line-height: 1; letter-spacing: -0.035em; }
+.titel-2 { font-size: clamp(1.85rem, 1.35rem + 2.2vw, 3rem); line-height: 1.06; letter-spacing: -0.028em; }
+.titel-3 { font-size: clamp(1.3rem, 1.15rem + 0.6vw, 1.6rem); line-height: 1.18; letter-spacing: -0.018em; }
+.titel-4 { font-size: 1.0625rem; line-height: 1.3; letter-spacing: -0.005em; }
+.vorspann { font-size: clamp(1.125rem, 1rem + 0.5vw, 1.3rem); line-height: 1.5; color: var(--color-tinte-2); max-width: 46ch; text-wrap: pretty; }
+.lauftext { max-width: 62ch; text-wrap: pretty; }
+.klein { font-family: var(--font-titel); font-size: 0.875rem; line-height: 1.45; }
+.etikett { font-family: var(--font-titel); font-size: 0.8125rem; line-height: 1.3; font-weight: 500; color: var(--color-grau); }
+
+.textlink {
+  color: var(--color-blau-tief);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: color 160ms var(--ease-ruhig), text-decoration-color 160ms var(--ease-ruhig);
+}
+.textlink:hover { color: var(--color-blau-dunkel); text-decoration-thickness: 2px; }
+
+.nur-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+/* ── Knöpfe ─────────────────────────────────────────────────────────── */
+.knopf {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 3rem;
+  padding: 0.7rem 1.35rem;
+  font-family: var(--font-titel);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  border-radius: var(--radius-knopf);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: background-color 180ms var(--ease-ruhig), border-color 180ms var(--ease-ruhig), color 180ms var(--ease-ruhig), transform 120ms var(--ease-ruhig);
+}
+.knopf:active { transform: translateY(1px); }
+.knopf-primaer { background: var(--color-blau-tief); color: var(--color-weiss); }
+.knopf-primaer:hover { background: var(--color-blau-dunkel); }
+.knopf-sekundaer { background: transparent; color: var(--color-tinte); border-color: var(--color-tinte); }
+.knopf-sekundaer:hover { background: var(--color-tinte); color: var(--color-papier); }
+.knopf-klein { min-height: 2.75rem; padding: 0.55rem 1rem; font-size: 0.9375rem; }
+.knopf .pfeil { transition: transform 220ms var(--ease-ruhig); }
+.knopf:hover .pfeil { transform: translateX(3px); }
+
+/* ── Sockelleiste: die Linie zwischen Wand und Boden, zugleich Abschnittstrenner ── */
+.sockelleiste {
+  height: 11px;
+  background: var(--color-papier);
+  border-top: 1px solid var(--color-linie-stark);
+  border-bottom: 1px solid var(--color-linie-stark);
+}
+
+/* ── Raum: perspektivische Bodenfläche (reines CSS, eine transformierte Ebene je Material) ── */
+.raum {
+  position: relative;
+  overflow: hidden;
+  perspective: 560px;
+  perspective-origin: 50% -80%;
+  background: var(--color-linie);
+  isolation: isolate;
+}
+.boden {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 320%;
+  height: 300%;
+  transform-origin: 50% 0;
+  transform: translateX(-50%) rotateX(74deg);
+  background-image: var(--boden-webp);
+  background-repeat: repeat;
+  background-position: 50% 0;
+  background-size: var(--kachel, 520px) auto;
+  opacity: 0;
+}
+@supports (background-image: image-set(url("a.avif") type("image/avif"))) {
+  .boden { background-image: image-set(var(--boden-avif) type("image/avif"), var(--boden-webp) type("image/webp")); }
+}
+.boden[data-aktiv="true"] { opacity: 1; }
+/* Licht: an der Wand dunkler, zum Betrachter hin heller. Liegt über allen Bodenebenen. */
+.raum::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--color-tinte) 36%, transparent), transparent 38%);
+  pointer-events: none;
+}
+@media (max-width: 47.99rem) {
+  /* Schmal: flachere, ruhigere Fläche */
+  .raum { perspective: 620px; perspective-origin: 50% -60%; }
+  .boden { width: 380%; transform: translateX(-50%) rotateX(70deg); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .boden { transition: opacity 520ms var(--ease-ruhig); }
+}
+
+/* Materialwahl im Einstieg */
+.bodenwahl { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.bodenwahl label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 2.75rem;
+  padding: 0.3rem 0.9rem 0.3rem 0.3rem;
+  font-family: var(--font-titel);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-tinte);
+  background: var(--color-papier);
+  border: 1.5px solid var(--color-linie-stark);
+  border-radius: var(--radius-knopf);
+  cursor: pointer;
+  transition: border-color 160ms var(--ease-ruhig), background-color 160ms var(--ease-ruhig);
+}
+.bodenwahl label:hover { border-color: var(--color-tinte); }
+.bodenwahl input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.bodenwahl input:checked + label { border-color: var(--color-blau-tief); box-shadow: inset 0 0 0 1px var(--color-blau-tief); background: var(--color-weiss); }
+.bodenwahl input:focus-visible + label { outline: 3px solid var(--color-blau-tief); outline-offset: 3px; }
+.bodenwahl .probe { width: 2rem; height: 2rem; object-fit: cover; flex: none; }
+
+/* ── Dielen: Leistungsbereiche als versetzt liegende Bretter ────────── */
+.dielen { display: grid; gap: 0; }
+.diele-platz:first-child .diele { border-top: 1px solid var(--color-linie-stark); }
+.diele {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  background: var(--color-papier);
+  border-bottom: 1px solid var(--color-linie-stark);
+  color: inherit;
+  transition: background-color 220ms var(--ease-ruhig);
+}
+.diele:hover { background: var(--color-weiss); }
+.diele .diele-bild { overflow: hidden; aspect-ratio: 16 / 7; }
+.diele .diele-bild img { width: 100%; height: 100%; object-fit: cover; transition: transform 700ms var(--ease-ruhig); }
+.diele:hover .diele-bild img { transform: scale(1.04); }
+.diele .diele-text { padding: 1.4rem 1.25rem 1.6rem; display: grid; gap: 0.5rem; align-content: center; }
+.diele .diele-pfeil { transition: transform 240ms var(--ease-ruhig); }
+.diele:hover .diele-pfeil { transform: translateX(5px); }
+@media (min-width: 48rem) {
+  .diele {
+    grid-template-columns: minmax(0, 34%) minmax(0, 1fr) auto;
+    align-items: stretch;
+    min-height: 11.5rem;
+    border-right: 1px solid var(--color-linie-stark);
+    border-left: 1px solid var(--color-linie-stark);
+  }
+  /* Schiffsboden: jedes Brett beginnt und endet an anderer Stelle */
+  .diele-platz:nth-child(3n + 1) { margin-right: 14%; }
+  .diele-platz:nth-child(3n + 2) { margin-left: 9%; }
+  .diele-platz:nth-child(3n + 3) { margin-left: 3%; margin-right: 7%; }
+  .diele .diele-bild { aspect-ratio: auto; height: 100%; min-height: 11.5rem; }
+  .diele .diele-text { padding: 1.5rem 2rem; }
+  .diele .diele-ende { display: flex; align-items: center; padding-right: 2rem; }
+}
+@media (max-width: 47.99rem) { .diele .diele-ende { display: none; } }
+
+/* ── Handmuster: Materialproben mit Etikett ─────────────────────────── */
+.handmuster { display: grid; gap: 0.75rem; color: inherit; }
+.handmuster .flaeche { position: relative; aspect-ratio: 1; overflow: hidden; background: var(--color-linie); }
+.handmuster .flaeche img { width: 100%; height: 100%; object-fit: cover; transition: transform 600ms var(--ease-ruhig); }
+a.handmuster:hover .flaeche img { transform: scale(1.05); }
+.handmuster .ohne-bild { display: grid; place-items: center; height: 100%; padding: 1rem; text-align: center; background: var(--color-blau-hell); color: var(--color-blau-dunkel); font-family: var(--font-titel); font-weight: 600; font-size: 0.9375rem; }
+
+/* ── Materialkunde (Akkordeon aus <details>) ────────────────────────── */
+.kunde { border-top: 1px solid var(--color-linie-stark); }
+.kunde details { border-bottom: 1px solid var(--color-linie-stark); scroll-margin-top: 6rem; }
+.kunde summary {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+  min-height: 4.5rem;
+  padding: 0.6rem 0.25rem;
+  cursor: pointer;
+  list-style: none;
+}
+.kunde summary::-webkit-details-marker { display: none; }
+.kunde summary .probe { width: 3.5rem; height: 3.5rem; object-fit: cover; background: var(--color-blau-hell); }
+.kunde summary .zeichen { width: 1.5rem; height: 1.5rem; flex: none; transition: transform 260ms var(--ease-ruhig); }
+.kunde details[open] summary .zeichen { transform: rotate(45deg); }
+.kunde summary:hover .titel-3 { color: var(--color-blau-tief); }
+.kunde .inhalt { padding: 0.5rem 0.25rem 2.25rem; }
+@media (min-width: 48rem) { .kunde .inhalt { padding-left: 4.75rem; } }
+
+/* ── Verlegemuster (gezeichnet) ─────────────────────────────────────── */
+.verlegemuster { width: 100%; height: auto; display: block; background: var(--color-papier); border: 1px solid var(--color-linie-stark); }
+.verlegemuster rect, .verlegemuster polygon { fill: var(--color-papier); stroke: var(--color-tinte); stroke-width: 1.25; vector-effect: non-scaling-stroke; }
+.verlegemuster .betont { fill: var(--color-blau-hell); stroke: var(--color-blau-tief); }
+
+/* ── Formulare ──────────────────────────────────────────────────────── */
+.feld { display: grid; gap: 0.5rem; }
+.feld label { font-family: var(--font-titel); font-size: 0.9375rem; font-weight: 600; }
+.feld input, .feld select, .feld textarea {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.7rem 0.85rem;
+  font-family: var(--font-titel);
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--color-tinte);
+  background: var(--color-weiss);
+  border: 1.5px solid var(--color-grau);
+  border-radius: var(--radius-knopf);
+}
+.feld textarea { min-height: 9rem; resize: vertical; }
+.feld input:focus-visible, .feld select:focus-visible, .feld textarea:focus-visible { outline: 3px solid var(--color-blau-tief); outline-offset: 2px; border-color: var(--color-blau-tief); }
+.feld [aria-invalid="true"] { border-color: var(--color-fehler); border-width: 2px; }
+.feld .hilfe { font-family: var(--font-titel); font-size: 0.875rem; color: var(--color-grau); }
+.feld .fehler { font-family: var(--font-titel); font-size: 0.9375rem; font-weight: 600; color: var(--color-fehler); }
+
+/* ── Fliesstext der Rechtsseiten ────────────────────────────────────── */
+.fliesstext > * + * { margin-top: 1rem; }
+.fliesstext h2 { margin-top: 3rem; scroll-margin-top: 6rem; }
+.fliesstext h3 { margin-top: 2rem; }
+.fliesstext ul { padding-left: 1.2rem; list-style: square; display: grid; gap: 0.5rem; }
+.fliesstext ul li::marker { color: var(--color-blau-tief); }
+.fliesstext p, .fliesstext ul { max-width: 66ch; }
+
+/* ── Dialoge (Register, Einwilligung) ───────────────────────────────── */
+dialog { color: var(--color-tinte); }
+dialog::backdrop { background: color-mix(in srgb, var(--color-tinte) 50%, transparent); }
+.register {
+  width: 100%;
+  max-width: none;
+  max-height: 100dvh;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--color-wand);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+@media (max-width: 63.99rem) { .register { height: 100dvh; } }
+@media (prefers-reduced-motion: no-preference) {
+  .register[open] { animation: register-auf 360ms var(--ease-ruhig); }
+  dialog[open]::backdrop { animation: abdunkeln 300ms ease-out; }
+}
+@keyframes register-auf { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: none; } }
+@keyframes abdunkeln { from { opacity: 0; } to { opacity: 1; } }
+
+/* ── Bewegung: Einblenden beim Scrollen, nur wo unterstützt und erwünscht ── */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .auftauchen {
+      animation: auftauchen linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 42%;
+    }
+  }
+  .einstieg > * { animation: einstieg 760ms var(--ease-ruhig) both; }
+  .einstieg > *:nth-child(2) { animation-delay: 90ms; }
+  .einstieg > *:nth-child(3) { animation-delay: 180ms; }
+  .einstieg > *:nth-child(4) { animation-delay: 270ms; }
+}
+@keyframes auftauchen { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+@keyframes einstieg { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+/* Druck: nur Inhalt */
+@media print {
+  header, footer, .raum, dialog { display: none !important; }
+  body { background: var(--color-weiss); }
+}
+
+/* Einstieg: Materialwahl erscheint nach Titel, Text und Knöpfen */
+@media (prefers-reduced-motion: no-preference) {
+  .auftritt-spaet { animation: einstieg 760ms var(--ease-ruhig) 340ms both; }
+}
+
+/*
+ * Einstieg der Startseite: Wand (Text und Materialwahl), Sockelleiste, Boden.
+ * Schmal: Text, Sockelleiste, Boden, dann die Materialwahl direkt unter dem Bild, das sie steuert. Dafür löst sich der
+ * Wand-Behälter auf (display: contents), und seine Kinder ordnen sich im Raster des Einstiegs ein.
+ * Breit: Text links, Materialwahl rechts in der Wand; der Boden füllt, was vom Bildschirm bleibt.
+ */
+.held {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto auto minmax(13rem, 1fr) auto;
+  min-height: min(calc(100dvh - 6.5rem), 60rem);
+}
+.held .wand { display: contents; }
+.held .wand > .einstieg { order: 1; padding: 2.5rem var(--spacing-rand) 2rem; }
+.held .sockelleiste { order: 2; }
+.held .raum { order: 3; }
+.held .wand > fieldset { order: 4; padding: 1.25rem var(--spacing-rand) 0; }
+@media (min-width: 64rem) {
+  .held { grid-template-rows: auto auto minmax(13rem, 1fr); }
+  .held .wand {
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+    align-items: end;
+    column-gap: 4rem;
+    width: 100%;
+    max-width: 82rem;
+    margin-inline: auto;
+    padding: 4rem var(--spacing-rand) 2.5rem;
+  }
+  .held .wand > .einstieg, .held .wand > fieldset { order: 0; padding: 0; }
+  .held .sockelleiste, .held .raum { order: 0; }
+}
+}
