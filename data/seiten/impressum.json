@@ -1,0 +1,44 @@
+{
+  "slug": "impressum",
+  "titel": "Impressum",
+  "einleitung": "Diese Website ist ein Gestaltungsentwurf. Das Impressum unterscheidet deshalb zwischen dem Betreiber der Demo und dem dargestellten Unternehmen.",
+  "stand": "5. Oktober 2026",
+  "bloecke": [
+    { "titel": "Betreiber dieser Demo-Website", "anker": "betreiber" },
+    "**Nick Holzbecher**",
+    "E-Mail: [holzbechernick@gmail.com](mailto:holzbechernick@gmail.com)",
+    "Für Inhalt und Betrieb dieser Demo ist ausschliesslich der oben genannte Betreiber verantwortlich. Die Demo wird auf GitHub Pages (GitHub, Inc., USA) veröffentlicht. Die Postanschrift des Betreibers wird auf Anfrage mitgeteilt und vor einer produktiven Nutzung ergänzt.",
+
+    { "titel": "Zweck dieser Website", "anker": "zweck" },
+    "Diese Website ist ein unverbindlicher Gestaltungsentwurf (Verkaufs-Demo) für die Casatex Zürich AG. Sie wurde ohne Auftrag des Unternehmens erstellt und ist **nicht** dessen offizielle Website. Für Suchmaschinen ist die Demo als nicht indexierbar gekennzeichnet (noindex). Das ist kein Zugangsschutz: Wer den Link kennt, kann die Seite aufrufen.",
+
+    { "titel": "Dargestelltes Unternehmen", "anker": "unternehmen" },
+    "**Casatex Zürich AG**",
+    "Hermetschloostrasse 77, 8048 Zürich",
+    "Telefon: [044 432 61 61](tel:+41444326161)",
+    "E-Mail: [info@casatexag.ch](mailto:info@casatexag.ch)",
+    "Rechtsform: Aktiengesellschaft mit Sitz in Zürich",
+    "Unternehmens-Identifikationsnummer (UID): CHE-112.962.998",
+    "Die Registerangaben stammen aus dem [Zentralen Firmenindex Zefix](https://www.zefix.ch/de/search/entity/list/firm/839033), abgerufen am 5. Oktober 2026. Vertretungsberechtigte Personen werden in dieser Demo nicht genannt. Diese Angaben ergänzt das Unternehmen bei einer Übernahme der Website.",
+
+    { "titel": "Quellen der Inhalte", "anker": "quellen" },
+    "Alle Aussagen über das Unternehmen stammen aus öffentlich zugänglichen, überprüfbaren Quellen (Stand 5. Oktober 2026):",
+    { "liste": [
+      "[Zentraler Firmenindex Zefix](https://www.zefix.ch/de/search/entity/list/firm/839033): Firma, Sitz, Adresse, UID und Zweck",
+      "[Mitgliederliste der Interessengemeinschaft Schweizer Parkettmarkt (ISP)](https://www.parkett-verband.ch/de/ISP/Mitglieder): Mitgliedschaft, Telefon und E-Mail",
+      "[berufswahl.zh.ch](https://berufswahl.zh.ch/schnupperlehre/casatex-zuerich-ag-boden-parkettleger-in-parkett-efz/) und [bodenhelden.ch](https://www.bodenhelden.ch/zuerich): Lehrbetrieb für Boden-Parkettleger/in EFZ"
+    ] },
+    "Die Texte der Materialkunde sind allgemeine Fachinformationen und keine Aussagen über das Angebot des Unternehmens. Bis zur Bestätigung durch die Casatex Zürich AG sind alle Inhalte unverbindlich.",
+
+    { "titel": "Name und Logo", "anker": "marke" },
+    "Der Name «Casatex» und das Logo gehören der Casatex Zürich AG. Das Logo wird unverändert gezeigt, um den Entwurf zu veranschaulichen. Eine Freigabe durch das Unternehmen steht aus.",
+
+    { "titel": "Bildnachweis", "anker": "bildnachweis" },
+    "Die Fotos und Texturen auf dieser Website sind **Materialbeispiele**. Sie zeigen keine Projekte, Räume oder Mitarbeitenden der Casatex Zürich AG. Die Bilder wurden zugeschnitten und verkleinert, einzelne Texturen für die wiederholte Darstellung nahtlos aufbereitet.",
+
+    { "titel": "Haftung", "anker": "haftung" },
+    "Die Inhalte dieser Demo wurden sorgfältig zusammengestellt, sind aber unverbindlich. Für die Inhalte verlinkter Websites sind ausschliesslich deren Betreiber verantwortlich."
+  ],
+  "seoTitel": "Impressum",
+  "seoBeschreibung": "Impressum der Verkaufs-Demo für die Casatex Zürich AG: Betreiber der Demo, dargestelltes Unternehmen, Quellen, Bildnachweis."
+}

@@ -1,0 +1,41 @@
+{
+  "slug": "datenschutz",
+  "titel": "Datenschutzerklärung",
+  "einleitung": "Diese Erklärung gilt für die Demo-Website. Sie beschreibt, welche Personendaten beim Besuch bearbeitet werden und welche nicht.",
+  "stand": "5. Oktober 2026",
+  "bloecke": [
+    { "titel": "Verantwortlicher", "anker": "verantwortlicher" },
+    "Verantwortlich für diese Demo-Website ist Nick Holzbecher, erreichbar unter [holzbechernick@gmail.com](mailto:holzbechernick@gmail.com). Die Postanschrift wird auf Anfrage mitgeteilt.",
+    "Die Casatex Zürich AG betreibt diese Demo nicht und erhält über die Website selbst keine Daten.",
+
+    { "titel": "Hosting bei GitHub Pages", "anker": "hosting" },
+    "Die Website wird von GitHub Pages ausgeliefert, einem Dienst der GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA. Bei jedem Aufruf verarbeitet GitHub technisch notwendige Verbindungsdaten. Nach Angaben von GitHub wird dabei die IP-Adresse der Besucherin oder des Besuchers zu Sicherheitszwecken protokolliert und gespeichert.",
+    "Dabei können Personendaten in die USA übermittelt werden. Auf diese Bearbeitung hat der Betreiber der Demo keinen Einfluss. Weitere Informationen finden Sie in der [Datenschutzerklärung von GitHub](https://docs.github.com/de/site-policy/privacy-policies/github-general-privacy-statement) und in den [Hinweisen zu GitHub Pages](https://docs.github.com/de/pages/getting-started-with-github-pages/what-is-github-pages#data-collection).",
+
+    { "titel": "Keine Cookies, keine Analyse", "anker": "cookies" },
+    "Diese Website setzt keine Cookies, verwendet keine Analyse- oder Werbedienste und speichert nichts in Ihrem Browser. Schriften und Bilder werden von derselben Adresse geladen wie die Seite selbst. Es werden keine Inhalte von Dritten eingebunden, auch keine Karte.",
+    "Weil keine einwilligungspflichtigen Dienste laufen, erscheint kein Cookie-Banner. Sollte später ein optionaler Dienst hinzukommen, wird er erst nach Ihrer ausdrücklichen Zustimmung geladen. Die Einstellungen erreichen Sie dann jederzeit über den Link «Datenschutz-Einstellungen» am Seitenende.",
+
+    { "titel": "Kontaktformular", "anker": "formular" },
+    "Das Formular auf der Kontaktseite überträgt keine Daten an diese Website. Es erstellt aus Ihren Eingaben eine E-Mail in Ihrem eigenen E-Mail-Programm. Erst wenn Sie diese E-Mail dort absenden, gelangen Ihre Angaben an die Casatex Zürich AG (info@casatexag.ch). Für die Bearbeitung Ihrer Anfrage ist dann die Casatex Zürich AG verantwortlich.",
+    "Die Schaltfläche «Nachricht kopieren» legt den Text in die Zwischenablage Ihres Geräts. Er verlässt Ihr Gerät dabei nicht.",
+
+    { "titel": "Telefon- und E-Mail-Links", "anker": "links-kontakt" },
+    "Ein Klick auf eine Telefonnummer oder E-Mail-Adresse öffnet die Telefon- oder E-Mail-Anwendung Ihres Geräts. Die Website erfährt davon nichts.",
+
+    { "titel": "Externe Links", "anker": "links-extern" },
+    "Der Link «Route in Google Maps öffnen» führt zu Google Maps. Erst beim Anklicken werden Daten an Google übertragen. Dort gilt die Datenschutzerklärung von Google. Dasselbe gilt sinngemäss für die Links zu Quellen wie dem Firmenindex Zefix oder Verbandsseiten.",
+
+    { "titel": "Ihre Rechte", "anker": "rechte" },
+    "Nach dem Schweizer Datenschutzgesetz (DSG) können Sie Auskunft darüber verlangen, ob Personendaten über Sie bearbeitet werden. Sie können unrichtige Daten berichtigen lassen und unter den gesetzlichen Voraussetzungen die Löschung verlangen. Wenden Sie sich dafür an den oben genannten Verantwortlichen.",
+    "Aufsichtsbehörde ist der [Eidgenössische Datenschutz- und Öffentlichkeitsbeauftragte (EDÖB)](https://www.edoeb.admin.ch/).",
+
+    { "titel": "Späterer Produktivbetrieb", "anker": "produktiv" },
+    "Übernimmt die Casatex Zürich AG diese Website, ändern sich der Verantwortliche, das Hosting und allenfalls die eingesetzten Dienste, zum Beispiel ein Redaktionssystem. Diese Erklärung wird dann vor der Veröffentlichung angepasst.",
+
+    { "titel": "Stand und Änderungen", "anker": "aenderungen" },
+    "Diese Erklärung beschreibt den tatsächlichen Stand der Demo. Sie wurde nicht anwaltlich geprüft und ersetzt keine Rechtsberatung."
+  ],
+  "seoTitel": "Datenschutzerklärung",
+  "seoBeschreibung": "Datenschutzerklärung der Verkaufs-Demo für die Casatex Zürich AG: Hosting bei GitHub Pages, keine Cookies, Kontakt per E-Mail, externe Links."
+}

@@ -1,0 +1,127 @@
+[
+  {
+    "slug": "parkett",
+    "titel": "Parkett",
+    "gruppe": "holz",
+    "kurz": "Holzboden aus Stäben oder Tafeln, in vielen Mustern verlegbar.",
+    "abschnitte": [
+      { "_key": "aufbau", "titel": "Aufbau", "text": "Massivparkett besteht durchgehend aus einem Stück Holz. Mehrschichtparkett trägt eine Nutzschicht aus Edelholz auf einer Trägerschicht. Je stärker die Nutzschicht, desto öfter lässt sich der Boden abschleifen." },
+      { "_key": "holzarten", "titel": "Holzarten", "text": "Eiche wird am häufigsten gewählt, weil sie hart und formstabil ist. Daneben werden unter anderem Buche, Esche, Ahorn und Nussbaum verlegt. Jede Holzart bringt ihre eigene Farbe, Maserung und Härte mit." },
+      { "_key": "oberflaeche", "titel": "Oberfläche", "text": "Geöltes Parkett fühlt sich natürlich an und lässt sich stellenweise ausbessern, braucht aber regelmässige Pflege. Versiegeltes Parkett hat eine geschlossene Lackschicht und ist im Alltag pflegeleicht." },
+      { "_key": "auffrischen", "titel": "Auffrischen", "text": "Parkett mit genügend starker Nutzschicht kann abgeschliffen und neu geölt oder versiegelt werden. So bleibt ein Holzboden oft über Jahrzehnte erhalten." }
+    ],
+    "eigenschaften": ["Naturmaterial Holz", "Je nach Aufbau mehrfach abschleifbar", "Fusswarm", "Reagiert auf die Luftfeuchtigkeit"],
+    "bild": "boden-parkett",
+    "muster": [
+      { "_key": "schiffsboden", "art": "schiffsboden", "titel": "Schiffsboden", "text": "Die Stäbe liegen parallel, ihre Stösse sind unregelmässig versetzt. Das wirkt ruhig und zugleich lebendig." },
+      { "_key": "englisch", "art": "englisch", "titel": "Englischer Verband", "text": "Parallele Stäbe, jede Reihe um eine halbe Stablänge versetzt. Das Bild erinnert an eine Backsteinmauer." },
+      { "_key": "fischgrat", "art": "fischgrat", "titel": "Fischgrat", "text": "Die Stäbe treffen im rechten Winkel aufeinander und bilden ein Zickzack. Ein klassisches Muster mit viel Bewegung." },
+      { "_key": "wuerfel", "art": "wuerfel", "titel": "Würfel", "text": "Mehrere Stäbe bilden ein Quadrat, das Nachbarfeld liegt um 90 Grad gedreht. So entsteht ein Schachbrett aus Holz." }
+    ],
+    "reihenfolge": 10
+  },
+  {
+    "slug": "holzdielen",
+    "titel": "Holzdielen",
+    "gruppe": "holz",
+    "kurz": "Lange, breite Bretter für ein ruhiges, grosszügiges Bodenbild.",
+    "abschnitte": [
+      { "_key": "format", "titel": "Format", "text": "Dielen sind deutlich länger und breiter als Parkettstäbe. Wenige Fugen und eine durchlaufende Maserung lassen Räume grosszügig wirken. Es gibt sie massiv und als mehrschichtige Landhausdiele." },
+      { "_key": "achten", "titel": "Worauf es ankommt", "text": "Breite Formate zeigen das Arbeiten des Holzes stärker als schmale. Raumklima, Untergrund und Verlegeart sollten deshalb zum Format passen." }
+    ],
+    "eigenschaften": ["Wenige Fugen", "Massiv oder mehrschichtig", "Ruhiges Bodenbild"],
+    "bild": "boden-dielen",
+    "reihenfolge": 20
+  },
+  {
+    "slug": "teppichboden",
+    "titel": "Teppichboden",
+    "gruppe": "textil",
+    "kurz": "Textiler Belag als Bahnenware, Fliese oder abgepasster Teppich.",
+    "abschnitte": [
+      { "_key": "flor", "titel": "Florarten", "text": "Bei Schlingenware bleiben die Garnschlingen geschlossen, die Oberfläche ist robust und strukturiert. Bei Velours sind die Schlingen aufgeschnitten, das ergibt eine samtige, gleichmässige Fläche." },
+      { "_key": "fasern", "titel": "Fasern", "text": "Wolle ist ein Naturprodukt, elastisch und wenig schmutzanfällig. Kunstfasern wie Polyamid sind besonders strapazierfähig und pflegeleicht." },
+      { "_key": "formate", "titel": "Formate", "text": "Bahnenware wird von der Rolle verlegt. Teppichfliesen lassen sich einzeln austauschen. Abgepasste Teppiche liegen lose auf einem anderen Boden." }
+    ],
+    "eigenschaften": ["Dämpft Trittschall", "Fusswarm und weich", "Bahn, Fliese oder abgepasst"],
+    "bild": "boden-teppich",
+    "reihenfolge": 30
+  },
+  {
+    "slug": "naturfaser",
+    "titel": "Sisal, Kokos und Jute",
+    "gruppe": "textil",
+    "kurz": "Gewebte Pflanzenfasern mit markanter, trockener Struktur.",
+    "abschnitte": [
+      { "_key": "material", "titel": "Material", "text": "Sisal stammt aus den Blättern der Agave, Kokos aus der Faserhülle der Kokosnuss, Jute aus dem Stängel der Jutepflanze. Die Fasern werden zu festen, sichtbar strukturierten Belägen gewebt." },
+      { "_key": "alltag", "titel": "Im Alltag", "text": "Naturfaserbeläge sind robust und haben eine griffige Oberfläche. Nässe vertragen sie schlecht, darum eignen sie sich für trockene Räume." }
+    ],
+    "eigenschaften": ["Nachwachsender Rohstoff", "Markante Struktur", "Für trockene Räume"],
+    "bild": "muster-naturfaser",
+    "reihenfolge": 40
+  },
+  {
+    "slug": "linoleum",
+    "titel": "Linoleum",
+    "gruppe": "elastisch",
+    "kurz": "Belag aus Leinöl, Harzen, Holz- und Korkmehl auf Jutegewebe.",
+    "abschnitte": [
+      { "_key": "material", "titel": "Material", "text": "Linoleum besteht überwiegend aus nachwachsenden und mineralischen Rohstoffen: Leinöl, Naturharze, Holz- und Korkmehl, Kalksteinmehl und Pigmente, aufgebracht auf ein Jutegewebe." },
+      { "_key": "alltag", "titel": "Im Alltag", "text": "Der Belag ist durchgefärbt, strapazierfähig und angenehm zu begehen. Er wird als Bahn, Platte oder Klickelement verlegt." }
+    ],
+    "eigenschaften": ["Überwiegend natürliche Rohstoffe", "Durchgefärbt", "Strapazierfähig"],
+    "bild": "boden-linoleum",
+    "reihenfolge": 50
+  },
+  {
+    "slug": "vinyl",
+    "titel": "Vinyl und Designbeläge",
+    "gruppe": "elastisch",
+    "kurz": "Kunststoffbelag mit vielen Dekoren, unempfindlich gegen Wasser.",
+    "abschnitte": [
+      { "_key": "material", "titel": "Material", "text": "Vinylbeläge bestehen aus PVC. Als Designbelag bilden sie Holz, Stein oder freie Muster nach und werden als Planke oder Fliese verlegt." },
+      { "_key": "alltag", "titel": "Im Alltag", "text": "Vinyl ist wasserunempfindlich, pflegeleicht und leise zu begehen. Deshalb wird es oft in Küchen, Bädern und Korridoren eingesetzt." }
+    ],
+    "eigenschaften": ["Unempfindlich gegen Wasser", "Viele Dekore", "Geringe Aufbauhöhe"],
+    "reihenfolge": 60
+  },
+  {
+    "slug": "kautschuk",
+    "titel": "Kautschuk",
+    "gruppe": "elastisch",
+    "kurz": "Dauerelastischer Belag für stark begangene Flächen.",
+    "abschnitte": [
+      { "_key": "material", "titel": "Material", "text": "Kautschukbeläge werden aus Natur- oder Synthesekautschuk hergestellt. Sie bleiben dauerhaft elastisch und kommen mit glatter oder genoppter Oberfläche vor." },
+      { "_key": "alltag", "titel": "Im Alltag", "text": "Kautschuk ist sehr widerstandsfähig, trittsicher und dämpft Schritte. Man findet ihn häufig in Schulen, Spitälern und Verkehrsbauten, zunehmend auch im Wohnbereich." }
+    ],
+    "eigenschaften": ["Dauerelastisch", "Trittsicher", "Sehr widerstandsfähig"],
+    "bild": "muster-kautschuk",
+    "reihenfolge": 70
+  },
+  {
+    "slug": "kork",
+    "titel": "Kork",
+    "gruppe": "elastisch",
+    "kurz": "Rinde der Korkeiche: warm, federnd und leise.",
+    "abschnitte": [
+      { "_key": "material", "titel": "Material", "text": "Kork ist die Rinde der Korkeiche. Sie wird geschält, ohne den Baum zu fällen, und wächst wieder nach. Für Böden wird Korkgranulat zu Platten oder Bahnen gepresst." },
+      { "_key": "alltag", "titel": "Im Alltag", "text": "Korkböden federn leicht, fühlen sich warm an und schlucken Schall. Die Oberfläche wird geölt, gewachst oder versiegelt und so vor Abnutzung geschützt." }
+    ],
+    "eigenschaften": ["Nachwachsender Rohstoff", "Fusswarm und federnd", "Schalldämmend"],
+    "bild": "boden-kork",
+    "reihenfolge": 80
+  },
+  {
+    "slug": "laminat",
+    "titel": "Laminat",
+    "gruppe": "weitere",
+    "kurz": "Trägerplatte mit Dekorschicht und harter Schutzschicht.",
+    "abschnitte": [
+      { "_key": "material", "titel": "Material", "text": "Laminat besteht aus einer Holzfaserplatte, einer bedruckten Dekorschicht und einer harten Schutzschicht. Das Dekor bildet meist Holz oder Stein nach." },
+      { "_key": "alltag", "titel": "Im Alltag", "text": "Die Oberfläche ist kratzfest und pflegeleicht. Anders als Parkett lässt sich Laminat nicht abschleifen. Beschädigte Elemente werden ersetzt." }
+    ],
+    "eigenschaften": ["Kratzfeste Oberfläche", "Schwimmend verlegbar", "Nicht abschleifbar"],
+    "bild": "muster-laminat",
+    "reihenfolge": 90
+  }
+]

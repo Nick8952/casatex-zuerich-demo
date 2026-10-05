@@ -1,0 +1,19 @@
+{
+  "firma": "Casatex Zürich AG",
+  "kurzname": "Casatex",
+  "claim": "Parkett, Teppiche und Bodenbeläge in Zürich",
+  "rechtsform": "Aktiengesellschaft",
+  "uid": "CHE-112.962.998",
+  "adresse": { "strasse": "Hermetschloostrasse 77", "plz": "8048", "ort": "Zürich", "quartier": "Altstetten", "land": "Schweiz" },
+  "telefon": "+41 44 432 61 61",
+  "email": "info@casatexag.ch",
+  "routenlink": "https://www.google.com/maps/search/?api=1&query=Casatex+Z%C3%BCrich+AG%2C+Hermetschloostrasse+77%2C+8048+Z%C3%BCrich",
+  "oeffnungszeiten": [],
+  "logo": "logo-casatex",
+  "seoBild": "og-casatex",
+  "herkunft": [
+    { "quelle": "Zentraler Firmenindex Zefix: Firma, Sitz, Adresse, UID, Rechtsform", "url": "https://www.zefix.ch/de/search/entity/list/firm/839033", "abgerufen": "2026-10-05", "art": "amtlich" },
+    { "quelle": "ISP, Mitgliederliste: Telefon und E-Mail", "url": "https://www.parkett-verband.ch/de/ISP/Mitglieder", "abgerufen": "2026-10-05", "art": "verband" },
+    { "quelle": "berufswahl.zh.ch, Eintrag des Lehrbetriebs: Telefon, E-Mail, Adresse", "url": "https://berufswahl.zh.ch/schnupperlehre/casatex-zuerich-ag-boden-parkettleger-in-parkett-efz/", "abgerufen": "2026-10-05", "art": "behoerdenportal" }
+  ]
+}

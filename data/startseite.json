@@ -1,0 +1,83 @@
+{
+  "hero": {
+    "titel": "Der Boden macht den Raum.",
+    "text": "Die Casatex Zürich AG führt Bodenbelagsarbeiten aus: Parkett, Teppiche und weitere Beläge. Sie finden uns in Zürich-Altstetten.",
+    "knopf": {
+      "text": "Projekt besprechen",
+      "ziel": "/kontakt/"
+    },
+    "zweiterKnopf": {
+      "text": "Materialien entdecken",
+      "ziel": "/leistungen/#materialkunde"
+    },
+    "wechselTitel": "Boden im Bild wechseln",
+    "imBild": "Im Bild",
+    "boeden": [
+      {
+        "_key": "parkett",
+        "titel": "Parkett",
+        "bild": "boden-parkett",
+        "kachelbreite": 520
+      },
+      {
+        "_key": "dielen",
+        "titel": "Dielen",
+        "bild": "boden-dielen",
+        "kachelbreite": 520
+      },
+      {
+        "_key": "teppich",
+        "titel": "Teppich",
+        "bild": "boden-teppich",
+        "kachelbreite": 460
+      },
+      {
+        "_key": "linoleum",
+        "titel": "Linoleum",
+        "bild": "boden-linoleum",
+        "kachelbreite": 380
+      },
+      {
+        "_key": "kork",
+        "titel": "Kork",
+        "bild": "boden-kork",
+        "kachelbreite": 460
+      }
+    ]
+  },
+  "leistungen": {
+    "titel": "Unsere Bereiche",
+    "text": "Bodenbeläge sind unser Fach. Jeder Bereich hat eine eigene Seite mit Materialkunde."
+  },
+  "materialien": {
+    "titel": "Materialien im Vergleich",
+    "text": "Holz, Textil oder elastischer Belag: Die Materialkunde erklärt Aufbau, Eigenschaften und Pflege der gängigen Bodenmaterialien.",
+    "link": {
+      "text": "Materialien entdecken",
+      "ziel": "/leistungen/#materialkunde"
+    },
+    "bild": "foto-holzmuster"
+  },
+  "ueber": {
+    "titel": "Fachbetrieb in Zürich-Altstetten",
+    "text": "Aktiengesellschaft mit Sitz in Zürich, Mitglied im Parkettverband und Lehrbetrieb für Parkettleger.",
+    "link": {
+      "text": "Über Casatex",
+      "ziel": "/ueber-casatex/"
+    }
+  },
+  "referenzen": {
+    "titel": "Referenzen",
+    "text": "Ausgeführte Arbeiten der Casatex Zürich AG."
+  },
+  "partner": {
+    "titel": "Partner und Marken",
+    "text": "Mit diesen Herstellern und Verbänden arbeitet Casatex zusammen."
+  },
+  "kontakt": {
+    "titel": "Sprechen wir über Ihren Boden",
+    "text": "Sie erreichen uns telefonisch und per E-Mail. Oder Sie bereiten Ihre Anfrage in Ruhe mit dem Formular vor."
+  },
+  "seoTitel": "Parkett, Teppiche und Bodenbeläge in Zürich",
+  "seoBeschreibung": "Casatex Zürich AG: Fachbetrieb für Bodenbelagsarbeiten in Zürich-Altstetten. Parkett, Teppiche und Bodenbeläge, mit Materialkunde zum Vergleichen."
+}

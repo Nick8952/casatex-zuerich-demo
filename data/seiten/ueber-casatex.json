@@ -1,0 +1,49 @@
+{
+  "titel": "Über Casatex",
+  "einleitung": "Die Casatex Zürich AG ist ein Fachbetrieb für Bodenbeläge mit Sitz in Zürich-Altstetten.",
+  "bild": "foto-musterreihe",
+  "aussagenTitel": "Das Unternehmen in Kürze",
+  "aussagen": [
+    {
+      "_key": "gesellschaft",
+      "titel": "Aktiengesellschaft mit Sitz in Zürich",
+      "text": "Die Casatex Zürich AG ist im Handelsregister des Kantons Zürich eingetragen (CHE-112.962.998). Der Sitz befindet sich an der Hermetschloostrasse 77 in 8048 Zürich.",
+      "link": { "text": "Eintrag im Firmenindex Zefix", "ziel": "https://www.zefix.ch/de/search/entity/list/firm/839033" },
+      "herkunft": [{ "quelle": "Zentraler Firmenindex Zefix", "url": "https://www.zefix.ch/de/search/entity/list/firm/839033", "abgerufen": "2026-10-05", "art": "amtlich" }],
+      "freigabe": "demo"
+    },
+    {
+      "_key": "isp",
+      "titel": "Mitglied im Parkettverband",
+      "text": "Casatex ist Mitglied der Interessengemeinschaft Schweizer Parkettmarkt (ISP). Die ISP vertritt die Interessen der Schweizer Parkettbranche.",
+      "link": { "text": "Mitgliederliste der ISP", "ziel": "https://www.parkett-verband.ch/de/ISP/Mitglieder" },
+      "herkunft": [{ "quelle": "ISP, Mitgliederliste", "url": "https://www.parkett-verband.ch/de/ISP/Mitglieder", "abgerufen": "2026-10-05", "art": "verband" }],
+      "freigabe": "demo"
+    },
+    {
+      "_key": "lehrbetrieb",
+      "titel": "Lehrbetrieb",
+      "text": "Casatex bildet Boden-Parkettlegerinnen und Boden-Parkettleger EFZ der Fachrichtung Parkett aus.",
+      "link": { "text": "Eintrag auf berufswahl.zh.ch", "ziel": "https://berufswahl.zh.ch/schnupperlehre/casatex-zuerich-ag-boden-parkettleger-in-parkett-efz/" },
+      "herkunft": [
+        { "quelle": "berufswahl.zh.ch, Eintrag des Lehrbetriebs", "url": "https://berufswahl.zh.ch/schnupperlehre/casatex-zuerich-ag-boden-parkettleger-in-parkett-efz/", "abgerufen": "2026-10-05", "art": "behoerdenportal" },
+        { "quelle": "bodenhelden.ch, Lehrbetriebe Kanton Zürich", "url": "https://www.bodenhelden.ch/zuerich", "abgerufen": "2026-10-05", "art": "verband" }
+      ],
+      "freigabe": "demo"
+    }
+  ],
+  "zweck": {
+    "titel": "Unternehmenszweck laut Handelsregister",
+    "zitat": "Die Gesellschaft bezweckt die Ausführung sämtlicher Arbeiten in den Bereichen Bodenbeläge und Vorhänge.",
+    "text": "Zentraler Firmenindex Zefix, Casatex Zürich AG, CHE-112.962.998",
+    "herkunft": [{ "quelle": "Zentraler Firmenindex Zefix, Zweck der Gesellschaft", "url": "https://www.zefix.ch/de/search/entity/list/firm/839033", "abgerufen": "2026-10-05", "art": "amtlich" }],
+    "freigabe": "demo"
+  },
+  "aufruf": {
+    "titel": "Fragen zum Betrieb oder zu einem Vorhaben?",
+    "text": "Rufen Sie an oder schreiben Sie uns. Die Kontaktseite zeigt alle Wege.",
+    "knopf": { "text": "Projekt besprechen", "ziel": "/kontakt/" }
+  },
+  "seoTitel": "Über Casatex",
+  "seoBeschreibung": "Casatex Zürich AG: Aktiengesellschaft mit Sitz in Zürich-Altstetten, Mitglied der Interessengemeinschaft Schweizer Parkettmarkt und Lehrbetrieb für Parkettleger."
+}

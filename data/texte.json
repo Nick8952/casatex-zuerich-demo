@@ -1,0 +1,143 @@
+{
+  "demoHinweis": "Entwurf. Diese Seite ist eine Gestaltungsstudie und nicht die offizielle Website der Casatex Zürich AG.",
+  "navigation": [
+    {
+      "text": "Leistungen und Materialien",
+      "ziel": "/leistungen/"
+    },
+    {
+      "text": "Über Casatex",
+      "ziel": "/ueber-casatex/"
+    },
+    {
+      "text": "Kontakt und Anfahrt",
+      "ziel": "/kontakt/"
+    }
+  ],
+  "kopf": {
+    "aufruf": {
+      "text": "Projekt besprechen",
+      "ziel": "/kontakt/"
+    },
+    "telefonLabel": "Anrufen",
+    "registerKnopf": "Materialregister",
+    "registerTitel": "Materialregister",
+    "registerText": "Alle Materialien der Materialkunde auf einen Blick.",
+    "menueKnopf": "Menü",
+    "schliessen": "Schliessen",
+    "materialkundeLink": {
+      "text": "Materialien entdecken",
+      "ziel": "/leistungen/#materialkunde"
+    }
+  },
+  "footer": {
+    "leitsatz": "Der Boden macht den Raum.",
+    "kontaktTitel": "Kontakt",
+    "seitenTitel": "Seiten",
+    "rechtlichesTitel": "Rechtliches",
+    "rechtliches": [
+      {
+        "text": "Impressum",
+        "ziel": "/impressum/"
+      },
+      {
+        "text": "Datenschutzerklärung",
+        "ziel": "/datenschutz/"
+      }
+    ],
+    "route": "Route in Google Maps öffnen",
+    "bildnachweis": {
+      "text": "Bildnachweis",
+      "ziel": "/impressum/#bildnachweis"
+    },
+    "copyright": "Casatex Zürich AG",
+    "demoHinweis": "Diese Website ist ein Gestaltungsentwurf von Nick Holzbecher und nicht die offizielle Website der Casatex Zürich AG."
+  },
+  "ui": {
+    "zumInhalt": "Zum Inhalt springen",
+    "symbolbild": "Materialbeispiel, kein Projekt von Casatex",
+    "materialinfo": "Allgemeine Materialinformation",
+    "mehrErfahren": "Mehr erfahren",
+    "zurUebersicht": "Alle Leistungen und Materialien",
+    "weitereBereiche": "Weitere Bereiche",
+    "telefon": "Telefon",
+    "email": "E-Mail",
+    "adresse": "Adresse",
+    "quellen": "Quellen",
+    "aussagenTitel": "Casatex in diesem Bereich",
+    "materialkundeTitel": "Materialkunde",
+    "fragenTitel": "Vor der Wahl klären",
+    "fragenText": "Diese Punkte entscheiden mit, welcher Boden passt. Sie gelten allgemein und ersetzen kein Gespräch über Ihren Raum.",
+    "zumBereich": "Zum Bereich",
+    "nichtGefundenTitel": "Diese Seite gibt es nicht",
+    "nichtGefundenText": "Die Adresse ist falsch oder die Seite wurde verschoben. Über die Startseite finden Sie alle Inhalte.",
+    "nichtGefundenLink": {
+      "text": "Zur Startseite",
+      "ziel": "/"
+    }
+  },
+  "formular": {
+    "titel": "Anfrage vorbereiten",
+    "einleitung": "Das Formular erstellt eine E-Mail in Ihrem E-Mail-Programm. Gesendet wird erst, wenn Sie dort auf «Senden» klicken. Die Website selbst übermittelt und speichert nichts.",
+    "name": "Name",
+    "email": "E-Mail",
+    "telefon": "Telefon (optional)",
+    "anliegen": "Anliegen",
+    "anliegenOptionen": [
+      {
+        "wert": "parkett",
+        "titel": "Parkett"
+      },
+      {
+        "wert": "teppiche",
+        "titel": "Teppiche"
+      },
+      {
+        "wert": "bodenbelaege",
+        "titel": "Bodenbeläge"
+      },
+      {
+        "wert": "anderes",
+        "titel": "Anderes Anliegen"
+      }
+    ],
+    "nachricht": "Nachricht",
+    "nachrichtHilfe": "Zum Beispiel Raum, ungefähre Fläche und gewünschtes Material.",
+    "pflicht": "Felder mit * sind Pflichtfelder.",
+    "datenschutzHinweis": "Wie mit Ihren Angaben umgegangen wird, steht in der",
+    "datenschutzLink": {
+      "text": "Datenschutzerklärung",
+      "ziel": "/datenschutz/"
+    },
+    "absenden": "E-Mail vorbereiten",
+    "hinweisNachher": "Ihr E-Mail-Programm sollte sich jetzt mit der vorbereiteten Nachricht öffnen. Gesendet ist sie erst, wenn Sie dort auf «Senden» klicken. Öffnet sich nichts, kopieren Sie die Nachricht und senden Sie sie an die unten genannte Adresse.",
+    "kopieren": "Nachricht kopieren",
+    "kopiert": "Die Nachricht liegt jetzt in Ihrer Zwischenablage.",
+    "kopierenFehler": "Kopieren war nicht möglich. Bitte schreiben Sie uns direkt per E-Mail.",
+    "betreff": "Anfrage über die Website",
+    "fehlerName": "Bitte geben Sie Ihren Namen an.",
+    "fehlerEmail": "Bitte geben Sie eine gültige E-Mail-Adresse an, zum Beispiel name@beispiel.ch.",
+    "fehlerNachricht": "Bitte beschreiben Sie Ihr Anliegen in ein paar Worten.",
+    "ohneJavascript": "Ohne JavaScript schreiben Sie uns bitte direkt an"
+  },
+  "einwilligung": {
+    "fussLink": "Datenschutz-Einstellungen",
+    "ruhendTitel": "Datenschutz-Einstellungen",
+    "ruhendText": "Diese Website setzt keine Cookies und bindet keine Dienste Dritter ein, die eine Einwilligung erfordern. Deshalb gibt es hier nichts einzustellen.",
+    "bannerTitel": "Datenschutz-Einstellungen",
+    "bannerText": "Diese Website möchte optionale Dienste einbinden. Sie entscheiden, welche. Ohne Ihre Zustimmung bleiben sie blockiert.",
+    "alleAkzeptieren": "Alle akzeptieren",
+    "nurNotwendige": "Nur notwendige",
+    "einstellungen": "Einstellungen",
+    "auswahlSpeichern": "Auswahl speichern",
+    "widerrufen": "Einwilligung widerrufen",
+    "notwendigTitel": "Notwendig",
+    "notwendigText": "Speichert Ihre Auswahl in diesem Dialog. Immer aktiv.",
+    "datenschutzerklaerung": "Datenschutzerklärung",
+    "kategorien": []
+  },
+  "seo": {
+    "titelZusatz": "Casatex Zürich AG",
+    "beschreibung": "Casatex Zürich AG: Parkett, Teppiche und Bodenbeläge. Fachbetrieb für Bodenbelagsarbeiten in Zürich-Altstetten."
+  }
+}

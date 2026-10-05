@@ -1,0 +1,97 @@
+[
+  {
+    "slug": "parkett",
+    "titel": "Parkett",
+    "kurztitel": "Parkett",
+    "kurz": "Holz als Boden: vom Fischgrat bis zur breiten Diele.",
+    "einleitung": "Parkett ist ein Bodenbelag aus Holz. Er wird aus einzelnen Stäben, Tafeln oder Dielen verlegt und lässt sich je nach Aufbau mehrmals auffrischen. Holzart, Verlegemuster und Oberfläche bestimmen, wie ein Raum wirkt.",
+    "aussagen": [
+      {
+        "_key": "isp",
+        "titel": "Mitglied im Parkettverband",
+        "text": "Die Casatex Zürich AG ist Mitglied der Interessengemeinschaft Schweizer Parkettmarkt (ISP). Die ISP vertritt die Interessen der Schweizer Parkettbranche.",
+        "link": { "text": "Mitgliederliste der ISP", "ziel": "https://www.parkett-verband.ch/de/ISP/Mitglieder" },
+        "herkunft": [{ "quelle": "ISP, Mitgliederliste", "url": "https://www.parkett-verband.ch/de/ISP/Mitglieder", "abgerufen": "2026-10-05", "art": "verband" }],
+        "freigabe": "demo"
+      },
+      {
+        "_key": "lehrbetrieb",
+        "titel": "Lehrbetrieb für Parkettleger",
+        "text": "Casatex bildet Boden-Parkettlegerinnen und Boden-Parkettleger EFZ der Fachrichtung Parkett aus.",
+        "herkunft": [
+          { "quelle": "berufswahl.zh.ch, Eintrag des Lehrbetriebs", "url": "https://berufswahl.zh.ch/schnupperlehre/casatex-zuerich-ag-boden-parkettleger-in-parkett-efz/", "abgerufen": "2026-10-05", "art": "behoerdenportal" },
+          { "quelle": "bodenhelden.ch, Lehrbetriebe Kanton Zürich", "url": "https://www.bodenhelden.ch/zuerich", "abgerufen": "2026-10-05", "art": "verband" }
+        ],
+        "freigabe": "demo"
+      }
+    ],
+    "bild": "foto-parkett-detail",
+    "boden": "boden-parkett",
+    "materialien": ["parkett", "holzdielen"],
+    "fragen": [
+      { "_key": "nutzung", "titel": "Raum und Nutzung", "text": "Wohnzimmer, Korridor oder Büro: Je stärker ein Boden beansprucht wird, desto wichtiger sind Härte der Holzart und Art der Oberfläche." },
+      { "_key": "untergrund", "titel": "Untergrund und Aufbauhöhe", "text": "Der Untergrund muss eben, trocken und tragfähig sein. Die Aufbauhöhe entscheidet mit, welches Parkett in Frage kommt und wie es an Türen und Schwellen anschliesst." },
+      { "_key": "heizung", "titel": "Fussbodenheizung", "text": "Viele Parkettarten eignen sich für Fussbodenheizungen. Holzart, Aufbau und Verlegeart müssen darauf abgestimmt sein." },
+      { "_key": "pflege", "titel": "Oberfläche und Pflege", "text": "Geölt oder versiegelt: Die Wahl bestimmt, wie der Boden aussieht, wie er sich anfühlt und wie viel Pflege er braucht." }
+    ],
+    "seoTitel": "Parkett",
+    "seoBeschreibung": "Parkett von Casatex in Zürich: Mitglied der ISP und Lehrbetrieb für Parkettleger. Mit Materialkunde zu Aufbau, Holzarten, Verlegemustern und Oberflächen.",
+    "reihenfolge": 10
+  },
+  {
+    "slug": "teppiche",
+    "titel": "Teppiche",
+    "kurztitel": "Teppiche",
+    "kurz": "Textile Beläge: weich, warm und leise unter den Füssen.",
+    "einleitung": "Teppiche und Teppichböden sind textile Bodenbeläge. Sie dämpfen den Trittschall, fühlen sich warm an und bringen Ruhe in einen Raum. Faser, Florart und Format entscheiden über Wirkung und Pflege.",
+    "aussagen": [
+      {
+        "_key": "zweck",
+        "titel": "Teil unseres Fachs",
+        "text": "Teppiche zählen zu den textilen Bodenbelägen. Laut Handelsregister führt die Casatex Zürich AG sämtliche Arbeiten im Bereich Bodenbeläge aus.",
+        "herkunft": [{ "quelle": "Zentraler Firmenindex Zefix, Zweck der Gesellschaft", "url": "https://www.zefix.ch/de/search/entity/list/firm/839033", "abgerufen": "2026-10-05", "art": "amtlich" }],
+        "freigabe": "demo"
+      }
+    ],
+    "bild": "foto-naturfaser",
+    "boden": "boden-teppich",
+    "materialien": ["teppichboden", "naturfaser"],
+    "fragen": [
+      { "_key": "nutzung", "titel": "Beanspruchung", "text": "Im Schlafzimmer zählt vor allem Komfort, im Büro oder Treppenhaus die Strapazierfähigkeit. Daraus ergibt sich die passende Qualität." },
+      { "_key": "faser", "titel": "Faser und Flor", "text": "Wolle oder Kunstfaser, Schlinge oder Velours: Material und Florart prägen Haptik, Aussehen und Pflegeaufwand." },
+      { "_key": "format", "titel": "Format", "text": "Bahnenware ergibt eine durchgehende Fläche. Fliesen lassen sich einzeln ersetzen. Ein abgepasster Teppich setzt einen Akzent auf einem bestehenden Boden." },
+      { "_key": "pflege", "titel": "Pflege", "text": "Regelmässiges Saugen erhält den Flor. Wie Flecken behandelt werden, hängt von der Faser ab." }
+    ],
+    "seoTitel": "Teppiche",
+    "seoBeschreibung": "Teppiche und textile Bodenbeläge von Casatex in Zürich. Mit Materialkunde zu Florarten, Fasern, Formaten und Naturfasern wie Sisal, Kokos und Jute.",
+    "reihenfolge": 20
+  },
+  {
+    "slug": "bodenbelaege",
+    "titel": "Bodenbeläge",
+    "kurztitel": "Bodenbeläge",
+    "kurz": "Linoleum, Vinyl, Kautschuk und Kork: elastisch und belastbar.",
+    "einleitung": "Elastische Bodenbeläge geben leicht nach und sind zugleich widerstandsfähig. Dazu gehören Linoleum, Vinyl, Kautschuk und Kork. Sie eignen sich für Wohnräume ebenso wie für stark begangene Flächen.",
+    "aussagen": [
+      {
+        "_key": "zweck",
+        "titel": "Unser Unternehmenszweck",
+        "text": "Die Casatex Zürich AG bezweckt laut Handelsregister die Ausführung sämtlicher Arbeiten in den Bereichen Bodenbeläge und Vorhänge.",
+        "herkunft": [{ "quelle": "Zentraler Firmenindex Zefix, Zweck der Gesellschaft", "url": "https://www.zefix.ch/de/search/entity/list/firm/839033", "abgerufen": "2026-10-05", "art": "amtlich" }],
+        "freigabe": "demo"
+      }
+    ],
+    "bild": "boden-linoleum",
+    "boden": "boden-linoleum",
+    "materialien": ["linoleum", "vinyl", "kautschuk", "kork", "laminat"],
+    "fragen": [
+      { "_key": "nutzung", "titel": "Beanspruchung", "text": "Küche, Bad, Praxis oder Verkaufsfläche: Die Nutzung bestimmt, wie widerstandsfähig der Belag sein muss." },
+      { "_key": "feuchte", "titel": "Feuchtigkeit", "text": "In Nassbereichen kommen wasserunempfindliche Beläge und dichte Anschlüsse in Frage. Nicht jedes Material eignet sich dafür." },
+      { "_key": "untergrund", "titel": "Untergrund", "text": "Elastische Beläge zeichnen Unebenheiten ab. Der Untergrund muss deshalb besonders eben und sauber vorbereitet sein." },
+      { "_key": "komfort", "titel": "Akustik und Gehkomfort", "text": "Kork und Kautschuk dämpfen Schritte besonders gut. Wer viel steht oder geht, merkt den Unterschied." }
+    ],
+    "seoTitel": "Bodenbeläge",
+    "seoBeschreibung": "Elastische Bodenbeläge von Casatex in Zürich. Mit Materialkunde zu Linoleum, Vinyl, Kautschuk, Kork und Laminat.",
+    "reihenfolge": 30
+  }
+]

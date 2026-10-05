@@ -1,0 +1,21 @@
+{
+  "titel": "Leistungen und Materialien",
+  "einleitung": "Die Casatex Zürich AG führt Bodenbelagsarbeiten aus. Hier finden Sie unsere drei Bereiche und eine Materialkunde, die bei der Wahl hilft.",
+  "bild": "foto-holzmuster",
+  "bereicheTitel": "Unsere Bereiche",
+  "materialkundeTitel": "Materialkunde",
+  "materialkundeText": "Allgemeine Informationen zu gängigen Bodenmaterialien. Welche Materialien und Ausführungen für Ihr Vorhaben in Frage kommen, besprechen Sie am besten direkt mit uns.",
+  "gruppen": [
+    { "kennung": "holz", "titel": "Holz", "text": "Parkett und Dielen" },
+    { "kennung": "textil", "titel": "Textil", "text": "Teppichboden und Naturfasern" },
+    { "kennung": "elastisch", "titel": "Elastische Beläge", "text": "Linoleum, Vinyl, Kautschuk und Kork" },
+    { "kennung": "weitere", "titel": "Weitere", "text": "Laminat" }
+  ],
+  "aufruf": {
+    "titel": "Welcher Boden passt zu Ihrem Raum?",
+    "text": "Erzählen Sie uns von Ihrem Vorhaben. Am einfachsten telefonisch oder per E-Mail.",
+    "knopf": { "text": "Projekt besprechen", "ziel": "/kontakt/" }
+  },
+  "seoTitel": "Leistungen und Materialien",
+  "seoBeschreibung": "Parkett, Teppiche und Bodenbeläge von Casatex in Zürich. Dazu eine Materialkunde zu Holz, Textil, Linoleum, Vinyl, Kautschuk, Kork und Laminat."
+}
