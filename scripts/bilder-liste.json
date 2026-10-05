@@ -1,0 +1,269 @@
+{
+  "logo-casatex": {
+    "datei": "casatex_logo_2030.jpg",
+    "art": "logo",
+    "breiten": [
+      285,
+      569
+    ],
+    "alt": "Casatex, Böden + Beläge",
+    "symbolbild": false,
+    "nachweis": {
+      "urheber": "Casatex Zürich AG",
+      "titel": "Logo «Casatex, Böden + Beläge»",
+      "quelle": "https://casatexag.ch/wp-content/uploads/2025/03/casatex_logo_2030.jpg",
+      "lizenz": "Marke und Logo der Casatex Zürich AG, Nutzung in der Demo vorbehaltlich Freigabe"
+    },
+    "abgerufen": "2026-10-05",
+    "bearbeitung": "Form und Farben unverändert; weisser Hintergrund transparent gesetzt, in WebP umgewandelt, verkleinert"
+  },
+  "boden-parkett": {
+    "datei": "ph-parkett-fischgrat.jpg",
+    "art": "kachel",
+    "breiten": [
+      480,
+      1280
+    ],
+    "alt": "Holzparkett, im Fischgratmuster verlegt",
+    "legende": "Parkett im Fischgratverband",
+    "symbolbild": true,
+    "nachweis": {
+      "urheber": "Jenelle van Heerden, Sergej Majboroda",
+      "titel": "Herringbone Parquet",
+      "quelle": "https://polyhaven.com/a/herringbone_parquet",
+      "lizenz": "CC0 1.0"
+    },
+    "abgerufen": "2026-10-05",
+    "bearbeitung": "nahtlose Textur, verkleinert"
+  },
+  "boden-dielen": {
+    "datei": "ph-holzdielen.jpg",
+    "art": "kachel",
+    "breiten": [
+      480,
+      1280
+    ],
+    "alt": "Breite Holzdielen mit sichtbarer Maserung",
+    "legende": "Holzdielen",
+    "symbolbild": true,
+    "nachweis": {
+      "urheber": "Dimitrios Savva",
+      "titel": "Wood Floor",
+      "quelle": "https://polyhaven.com/a/wood_floor",
+      "lizenz": "CC0 1.0"
+    },
+    "abgerufen": "2026-10-05",
+    "bearbeitung": "nahtlose Textur, verkleinert"
+  },
+  "boden-teppich": {
+    "datei": "us-teppich.jpg",
+    "art": "kachel",
+    "breiten": [
+      480,
+      1024
+    ],
+    "ausschnitt": {
+      "left": 500,
+      "top": 100,
+      "width": 1400,
+      "height": 1400
+    },
+    "nahtlos": true,
+    "alt": "Teppichboden mit dichtem, kurzem Flor in Graubeige",
+    "legende": "Teppichboden",
+    "symbolbild": true,
+    "nachweis": {
+      "urheber": "Lynda Sanchez",
+      "titel": "brown area rug",
+      "quelle": "https://unsplash.com/photos/brown-area-rug-UZZcLyvqXJs",
+      "lizenz": "Unsplash License"
+    },
+    "abgerufen": "2026-10-05",
+    "bearbeitung": "Ausschnitt, Helligkeit ausgeglichen, Ränder überblendet (nahtlos kachelbar)"
+  },
+  "boden-linoleum": {
+    "datei": "ph-linoleum.jpg",
+    "art": "kachel",
+    "breiten": [
+      480,
+      1024
+    ],
+    "alt": "Einfarbiger Linoleumbelag mit feiner Marmorierung",
+    "legende": "Linoleum",
+    "symbolbild": true,
+    "nachweis": {
+      "urheber": "Rob Tuytel",
+      "titel": "Linoleum Brown",
+      "quelle": "https://polyhaven.com/a/linoleum_brown",
+      "lizenz": "CC0 1.0"
+    },
+    "abgerufen": "2026-10-05",
+    "bearbeitung": "nahtlose Textur, verkleinert"
+  },
+  "boden-kork": {
+    "datei": "us-kork.jpg",
+    "art": "kachel",
+    "breiten": [
+      480,
+      1280
+    ],
+    "ausschnitt": {
+      "left": 500,
+      "top": 100,
+      "width": 1400,
+      "height": 1400
+    },
+    "nahtlos": true,
+    "alt": "Feinkörnige Korkoberfläche",
+    "legende": "Kork",
+    "symbolbild": true,
+    "nachweis": {
+      "urheber": "Josephine Barham",
+      "titel": "a close up view of a brown surface (Korkplatte)",
+      "quelle": "https://unsplash.com/photos/a-close-up-view-of-a-brown-surface-KsAo8ouBn8A",
+      "lizenz": "Unsplash License"
+    },
+    "abgerufen": "2026-10-05",
+    "bearbeitung": "Ausschnitt, Helligkeit ausgeglichen, Ränder überblendet (nahtlos kachelbar)"
+  },
+  "muster-laminat": {
+    "datei": "ph-laminat.jpg",
+    "art": "kachel",
+    "breiten": [
+      480
+    ],
+    "alt": "Laminatboden in hellem Holzdekor",
+    "legende": "Laminat",
+    "symbolbild": true,
+    "nachweis": {
+      "urheber": "Dario Barresi, Charlotte Baglioni",
+      "titel": "Laminate Floor 02",
+      "quelle": "https://polyhaven.com/a/laminate_floor_02",
+      "lizenz": "CC0 1.0"
+    },
+    "abgerufen": "2026-10-05",
+    "bearbeitung": "nahtlose Textur, verkleinert"
+  },
+  "muster-kautschuk": {
+    "datei": "ph-kautschuk.jpg",
+    "art": "kachel",
+    "breiten": [
+      480
+    ],
+    "alt": "Dunkle Kautschukplatten",
+    "legende": "Kautschuk",
+    "symbolbild": true,
+    "nachweis": {
+      "urheber": "Amal Kumar",
+      "titel": "Rubber Tiles",
+      "quelle": "https://polyhaven.com/a/rubber_tiles",
+      "lizenz": "CC0 1.0"
+    },
+    "abgerufen": "2026-10-05",
+    "bearbeitung": "nahtlose Textur, verkleinert"
+  },
+  "muster-naturfaser": {
+    "datei": "us-naturfaser.jpg",
+    "art": "foto",
+    "verhaeltnis": "1:1",
+    "breiten": [
+      480
+    ],
+    "alt": "Grob geflochtener Naturfaserteppich in Beige",
+    "legende": "Naturfaser",
+    "symbolbild": true,
+    "nachweis": {
+      "urheber": "B vB",
+      "titel": "Close-up of woven rug",
+      "quelle": "https://unsplash.com/photos/close-up-of-woven-rug-kdnfVGGPh_U",
+      "lizenz": "Unsplash License"
+    },
+    "abgerufen": "2026-10-05",
+    "bearbeitung": "quadratischer Ausschnitt, verkleinert"
+  },
+  "foto-parkett-detail": {
+    "datei": "us-parkett-detail.jpg",
+    "art": "foto",
+    "verhaeltnis": "3:2",
+    "breiten": [
+      640,
+      1100,
+      1600
+    ],
+    "alt": "Älteres Fischgratparkett mit Randfries, schräg aus der Nähe gesehen",
+    "legende": "Fischgratparkett mit Randfries",
+    "symbolbild": true,
+    "nachweis": {
+      "urheber": "Alex Cooper",
+      "titel": "Close-up of a wooden parquet floor pattern",
+      "quelle": "https://unsplash.com/photos/close-up-of-a-wooden-parquet-floor-pattern-K6vkTjYciX8",
+      "lizenz": "Unsplash License"
+    },
+    "abgerufen": "2026-10-05",
+    "bearbeitung": "Ausschnitt 3:2, verkleinert"
+  },
+  "foto-holzmuster": {
+    "datei": "us-holzmuster.jpg",
+    "art": "foto",
+    "verhaeltnis": "3:2",
+    "breiten": [
+      640,
+      1100,
+      1600
+    ],
+    "alt": "Lose Holzmuster in verschiedenen Holzarten und Farbtönen",
+    "legende": "Holzmuster in verschiedenen Holzarten",
+    "symbolbild": true,
+    "nachweis": {
+      "urheber": "Jakarta Parquet",
+      "titel": "brown wooden blocks on brown wooden table",
+      "quelle": "https://unsplash.com/photos/brown-wooden-blocks-on-brown-wooden-table-xs93vG_csGU",
+      "lizenz": "Unsplash License"
+    },
+    "abgerufen": "2026-10-05",
+    "bearbeitung": "Ausschnitt 3:2, verkleinert"
+  },
+  "foto-musterreihe": {
+    "datei": "us-musterreihe.jpg",
+    "art": "foto",
+    "verhaeltnis": "21:9",
+    "position": "south",
+    "breiten": [
+      640,
+      1100,
+      1600
+    ],
+    "alt": "Aufgereihte Holzmuster, hochkant nebeneinander gestellt",
+    "legende": "Aufgereihte Holzmuster",
+    "symbolbild": true,
+    "nachweis": {
+      "urheber": "lantai kayu indonesia",
+      "titel": "a stack of wooden planks sitting on top of a table",
+      "quelle": "https://unsplash.com/photos/a-stack-of-wooden-planks-sitting-on-top-of-a-table-LaEBSXbAy9M",
+      "lizenz": "Unsplash License"
+    },
+    "abgerufen": "2026-10-05",
+    "bearbeitung": "Ausschnitt 21:9, verkleinert"
+  },
+  "foto-naturfaser": {
+    "datei": "us-naturfaser.jpg",
+    "art": "foto",
+    "verhaeltnis": "3:2",
+    "breiten": [
+      640,
+      1100,
+      1600
+    ],
+    "alt": "Naturfaserteppich aus der Nähe: grob geflochtene Stränge in Beige",
+    "legende": "Geflochtener Naturfaserteppich",
+    "symbolbild": true,
+    "nachweis": {
+      "urheber": "B vB",
+      "titel": "Close-up of woven rug",
+      "quelle": "https://unsplash.com/photos/close-up-of-woven-rug-kdnfVGGPh_U",
+      "lizenz": "Unsplash License"
+    },
+    "abgerufen": "2026-10-05",
+    "bearbeitung": "Ausschnitt 3:2, verkleinert"
+  }
+}
