@@ -255,7 +255,8 @@ async function frisch({ breite = 1440, hoehe = 900, reduziert = false } = {}) {
     const a = await page.goto(BASE + s, { waitUntil: "networkidle0" });
     const b = await page.reload({ waitUntil: "networkidle0" });
     const canonical = await page.evaluate(() => document.querySelector('link[rel="canonical"]')?.href ?? "");
-    const gut = a.status() === 200 && b.status() === 200 && canonical.endsWith(`/casatex-zuerich-demo${s}`) && canonical.startsWith("https://");
+    // Nach dem Neuladen antwortet ein echter Server oft mit 304 (unverändert, aus dem Zwischenspeicher bestätigt): auch das ist ein Erfolg.
+    const gut = a.status() === 200 && [200, 304].includes(b.status()) && canonical.endsWith(`/casatex-zuerich-demo${s}`) && canonical.startsWith("https://");
     if (!gut) { alleOk = false; details.push(`${s}: ${a.status()}/${b.status()} ${canonical}`); }
   }
   ok(`Adressen: ${alleSeiten().length} Seiten per Direktaufruf und nach Neuladen erreichbar, Canonical zeigt auf die Demo`, alleOk, details.join(" | "));

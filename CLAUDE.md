@@ -32,7 +32,7 @@ data/                einstellungen.json, texte.json, startseite.json, leistungen
 studio/              eigenständiges Sanity Studio (eigenes package.json): schemas/, sanity.config.ts, sanity.cli.ts, env.ts
 scripts/             bilder-optimieren.mjs (+ bilder-liste.json), inhalt-pruefen.mts, export-nachbereiten.mjs, export-pruefen.mjs,
                      vorschau-server.mjs, seed.mts, sanity-bilder.mts (Bild-Spiegel, läuft vor jedem Build)
-werkzeuge/qa/        Browser-Prüfungen mit puppeteer-core: audit.mjs, funktionen.mjs, screenshots.mjs, chrome.mjs
+werkzeuge/qa/        Browser-Prüfungen mit puppeteer-core: audit.mjs, funktionen.mjs, screenshots.mjs, chrome.mjs; lighthouse.mjs
 assets/originale/    Logo und Materialbilder im Original + HERKUNFT.md (Quellen, Lizenzen, Prüfsummen)
 public/bilder/       erzeugte AVIF/WebP-Varianten (nie hochskaliert)
 docs/                INHALTSMATRIX, DESIGN, ENTSCHEIDUNGEN, BILDER, SANITY-VERCEL-EINRICHTUNG, INHALTE-PFLEGEN, UEBERGABE, PRUEFBERICHT
@@ -54,6 +54,7 @@ das eingebettete Studio. Design, Komponenten, Datenmodell und Texte sind neu.
 | Export lokal wie auf GitHub Pages ansehen | `npm run vorschau:pages` → <http://localhost:4321/casatex-zuerich-demo/> (`PORT=4333` bei belegtem Port) |
 | Browser-Prüfungen (Audit 4 Breiten × alle Seiten, Funktionen) | `npm run qa` (Vorschau-Server muss laufen; anderer Port: `BASE=http://localhost:4333/casatex-zuerich-demo`) |
 | Screenshots | `node werkzeuge/qa/screenshots.mjs` (`SEITEN=/,/kontakt/ BREITEN=360,1440`) |
+| Lighthouse (lokal oder live) | `node werkzeuge/qa/lighthouse.mjs` · `BASE=https://nick8952.github.io/casatex-zuerich-demo node werkzeuge/qa/lighthouse.mjs` |
 | Bilder neu erzeugen | `npm run bilder` (liest `scripts/bilder-liste.json`, schreibt `public/bilder/` und `data/bilder.json`) |
 | Go-Live-Probe (Vercel-Ziel, Indexierung, reservierte Testdomain) | `INDEXIERUNG=1 SITE_URL=https://www.example.com npm run build:vercel`, danach `DEPLOY_TARGET=vercel INDEXIERUNG=1 SITE_URL=https://www.example.com npm run export:pruefen`. Anschliessend wieder `npm run build`. Nur mit einer Testdomain (`example.com`, `*.test`) entfällt die Freigabeprüfung. |
 | Import nach Sanity prüfen (ohne Zugang) | `npm run seed -- --probe` |
